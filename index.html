@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase - Your One-Stop Shopping Destination</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+ 
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-shopping-bag me-2"></i>ShopEase
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">Register</a>
+                    </li>
+                    
+                    <li class="nav-item admin-link">
+                        <a class="nav-link" href="admin-products.html">
+                            <i class="fas fa-user-shield me-1"></i>Admin
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+ 
+    <button class="theme-toggle theme-toggle-fixed" id="fixedThemeToggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+    </button>
+
+   
+    <header class="hero-section">
+        <div class="hero-glow"></div>
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-md-6" data-aos="fade-right" data-aos-duration="1000">
+                    <h1 class="display-4 fw-bold text-white">Welcome to ShopEase</h1>
+                    <p class="lead text-white">Discover amazing products at unbeatable prices.</p>
+                    <a href="login.html" class="btn btn-primary btn-lg btn-glow scale-in btn-shine">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+  
+    <div class="section-divider">
+        <div class="divider-wave"></div>
+    </div>
+
+    <section class="product-slider">
+        <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+
+
+            <div class="carousel-indicators">
+                <span data-bs-target="#productCarousel" data-bs-slide-to="0" class="active"></span>
+                <span data-bs-target="#productCarousel" data-bs-slide-to="1"></span>
+                <span data-bs-target="#productCarousel" data-bs-slide-to="2"></span>
+                <span data-bs-target="#productCarousel" data-bs-slide-to="3"></span>
+                <span data-bs-target="#productCarousel" data-bs-slide-to="4"></span>
+                <span data-bs-target="#productCarousel" data-bs-slide-to="5"></span>
+            </div>
+
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://img.lazcdn.com/us/domino/a20dfa8d-1a60-4132-9aa4-cf70d7f5d75c_PK-1976-688.jpg_2200x2200q80.jpg" style="height: 500px;" class="d-block w-100 h-40" alt="Product 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://img.lazcdn.com/us/domino/d6f111fa-784c-4523-8489-fabed2a781b0_PK-1976-688.jpg_2200x2200q80.jpg" style="height: 500px;" class="d-block w-100" alt="Product 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://img.lazcdn.com/us/lazada_mars_image/9f4d95957dd12adcc5bfb341190922af.jpg_2200x2200q80.jpg" style="height: 500px; background-size: cover; " class="d-block w-100" alt="Product 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://img.lazcdn.com/us/lazada_mars_image/c72940960af0bf203bb26a7813d669e1.jpg_2200x2200q80.jpg" style="height: 500px; background-size: cover; " class="d-block w-100" alt="Product 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://img.lazcdn.com/us/lazada_mars_image/c72940960af0bf203bb26a7813d669e1.jpg_2200x2200q80.jpg" style="height: 500px; background-size: cover; " class="d-block w-100" alt="Product 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://img.lazcdn.com/us/domino/a20dfa8d-1a60-4132-9aa4-cf70d7f5d75c_PK-1976-688.jpg_2200x2200q80.jpg" style="height: 500px; background-size: cover; " class="d-block w-100" alt="Product 3">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+
+
+
+    
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card product-card">
+                            <img src="images/tshirt1.avif" class="card-img-top" alt="Product 7">
+                            <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <div class="card-body">
+                                <h5 class="card-title"><b>Black Tracksuit side lion face </b></h5>
+                                <p class="card-text">Black Tracksuit side lion face printed summer track Men's Clothing Summer Breathable T-Shirt and Black Shorts Gym wear and comfortable <br><br><span style="font-size: 20px;"><b>USD:$300.0</b></span></p>
+                                <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
+                                <a href="login.html" class="btn btn-primary" style="width: 320px;margin-top: 10px;"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card product-card">
+                            <img src="images/tshirt2.avif" class="card-img-top" style="height: 355px;" alt="Product 8">
+                            <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <div class="card-body">
+                                <h5 class="card-title"><b>Plain White T-Shirt For Men</b></h5>
+                                <p class="card-text">Plain White T-Shirt for men- Half Sleeve/Round Neck With Premium Excellent Quality Plan Basic T-Shirts For Boy's & Men's.Its a awesome Product <br><br><span style="font-size: 20px;"><b>USD:$125.0</b></span></p>
+                                <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
+                                <a href="login.html" class="btn btn-primary" style="width: 320px;margin-top: 10px "><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card product-card">
+                            <img src="images/tshirt3.avif" class="card-img-top" alt="Product 9">
+                            <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <div class="card-body">
+                                <h5 class="card-title"> <b> Party Track suits T-shirt & Trouser </b></h5>
+                                <p class="card-text">This Party Track suits T-shirt & Trouser For Men is a perfect blend of sport and street style. The stripe pattern adds a touch of uniqueness to the outfit. <br><br><span style="font-size: 20px;"><b>USD:$220.0</b></span></p>
+                                <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
+                                <a href="login.html" class="btn btn-primary" style="width: 320px;margin-top: 10px"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    
+                <div class="col-md-4">
+                    <div class="card product-card">
+                        <img src="images/sumsung.avif" class="card-img-top" alt="Product 4" style="height: 355px;">
+                        <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <div class="card-body">
+                            <h5 class="card-title"><b>Samsung Galaxy S25 Ultra</b></h5>
+                            <p class="card-text">Samsung Galaxy S25 Ultra 12 GB RAM + 512 GB ROM.Display 6.9" Dynamic AMOLED 2x QHD+,Performance 7 Years OS & Security upgrade <br><br><span style="font-size: 20px;"><b>USD:$6000.0</b></span></p>
+                            <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
+                            <a href="login.html" class="btn btn-primary" style="width: 320px;margin-top: 10px"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
+                         
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card product-card">
+                        <img src="images/iphone1.avif" class="card-img-top" alt="Product 5">
+                        <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <div class="card-body">
+                            <h5 class="card-title"><b>Apple Iphone 16 Pro Max</b></h5>
+                            <p class="card-text">Apple Iphone 16 Pro Max - 6.9" Inch Display - Factory locked - 1 Year Official Warranty.High Contrast Ratio: 2,000,000:1 for deep blacks and bright whites.<br><br><span style="font-size: 20px;"><b>USD:$6500.0</b></span></p>
+                            <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
+                            <a href="login.html" class="btn btn-primary" style="width: 320px;margin-top: 10px"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
+                          
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card product-card">
+                        <img src="images/iphone2.avif" class="card-img-top" style="height:350px;" alt="Product 6">
+                        <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <div class="card-body">
+                            
+                            <h5 class="card-title"><b>Apple IPhone 12 Pro Max</b></h5>
+                            <p class="card-text">Apple IPhone 12 Pro Max - 256GB - PTA APPROVED - Brand New Condition - 85+ Battery Health - (WITH FREE CHARGER & COVER) - like new phones <br><br><span style="font-size: 20px;"><b>USD:$3500.0</b></span></p>
+                            <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
+                            <a href="login.html" class="btn btn-primary" style="width: 320px;margin-top: 10px"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                   
+                 <div class="col-md-4">
+                    <div class="card product-card">
+                        <img src="images/airpods1.avif" class="card-img-top" alt="Product 1">
+                        <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <div class="card-body">
+                            <h5 class="card-title"><b>Airpods Air Pro </b></h5>
+                            <p class="card-text">Airpods Air Pro 3rd Gen TWS (True Wireless Stereo) Bluetooth Earbuds Dual Earphones Headset (Connect With All Bluetooth Devices).BLUETOOTH handfree <br><br><span style="font-size: 20px;"><b>USD:$200.0</b></span></p>
+                            <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
+                            <a href="login.html" class="btn btn-primary" style="width: 320px;margin-top: 10px"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
+                          
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card product-card">
+                        <img src="images/airpods2.jpg" class="card-img-top" alt="Product 2">
+                        <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <div class="card-body">
+                            <h5 class="card-title"><b>Airpods_Pro Wireless </b></h5>
+                            <p class="card-text">
+                                Airpods_Pro Wireless Earbuds Bluetooth 5.0 Compatible with IOS and Android.Battery capacity of the storage box: 2000MAH 8.Transmission distance :> 10M.<br><br><span style="font-size: 20px;"><b>USD:$270.0</b></span></p>
+                                <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
+                                <a href="login.html" class="btn btn-primary" style="width: 320px; margin-top: 10px"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
+             
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card product-card">
+                        <img src="images/airpods3.jpg" class="card-img-top" alt="Product 3">
+                        <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <div class="card-body">
+                            <h5 class="card-title"><b>Original AirPod Pro </b></h5>
+                            <p class="card-text">Original AirPod Pro (2nd Generation) Headset Wireless Bluetooth Connection-Durable Top Quality ANC Active Noise Cancellation Airbuds.<br><br><span style="font-size: 20px;"><b>USD:$250.0</b></span></p>
+                            <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
+                            <a href="login.html" class="btn btn-primary" style="width: 320px; margin-top: 10px"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+       
+        <a href="login.html " class="btn"  style="background: linear-gradient(to right, black, gray); color: white; width: 320px; margin: 20px 480px; border: none; font-weight: bold; padding: 10px 20px; text-align: center; display: inline-block; text-decoration: none; border-radius: 5px;">Explore More Products</a>
+
+
+
+
+    </section>
+
+    
+    <section class="py-5 bg-light pattern-dots">
+        <div class="container page-transition">
+            <h2 class="text-center mb-4 animated-text" data-aos="fade-up">Featured Categories</h2>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="card category-card img-hover-zoom">
+                        <div class="card-body text-center">
+                            <i class="fas fa-tshirt fa-3x mb-3"></i>
+                            <h5 class="card-title border-grow">Fashion</h5>
+                            <p class="card-text">Latest trends in clothing and accessories</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card category-card img-hover-zoom">
+                        <div class="card-body text-center">
+                            <i class="fas fa-laptop fa-3x mb-3"></i>
+                            <h5 class="card-title border-grow">Electronics</h5>
+                            <p class="card-text">Cutting-edge gadgets and devices</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="card category-card img-hover-zoom">
+                        <div class="card-body text-center">
+                            <i class="fas fa-home fa-3x mb-3"></i>
+                            <h5 class="card-title border-grow">Home & Living</h5>
+                            <p class="card-text">Everything you need for your home</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+    <div class="section-divider">
+        <div class="divider-wave"></div>
+    </div>
+
+    
+    <section class="py-5 page-transition pattern-grid">
+        <div class="container">
+            <h2 class="text-center mb-4 animated-text" data-aos="fade-up">Why Choose Us</h2>
+            <div class="row g-4 stagger-fade-in">
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-center card-rotate">
+                        <i class="fas fa-truck fa-3x mb-3 text-primary float-animation"></i>
+                        <h5 class="text-shadow-hover">Fast Delivery</h5>
+                        <p>Get your products delivered within 24 hours</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-center card-rotate">
+                        <i class="fas fa-shield-alt fa-3x mb-3 text-primary float-animation"></i>
+                        <h5 class="text-shadow-hover">Secure Payment</h5>
+                        <p>Multiple secure payment options</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-center card-rotate">
+                        <i class="fas fa-undo fa-3x mb-3 text-primary float-animation"></i>
+                        <h5 class="text-shadow-hover">Easy Returns</h5>
+                        <p>30-day return policy for all products</p>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-center card-rotate">
+                        <i class="fas fa-headset fa-3x mb-3 text-primary float-animation"></i>
+                        <h5 class="text-shadow-hover">24/7 Support</h5>
+                        <p>Round-the-clock customer service</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ 
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>ShopEase</h5>
+                    <p>Your one-stop shopping destination for all your needs.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Home</a></li>
+                        <li><a href="login.html" class="text-white">Login</a></li>
+                        <li><a href="register.html" class="text-white">Register</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt me-2"></i> 123 Shopping St, Retail City</p>
+                        <p><i class="fas fa-phone me-2"></i> +1 234 567 8900</p>
+                        <p><i class="fas fa-envelope me-2"></i> info@shopease.com</p>
+                    </address>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2023 ShopEase. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    
+  
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+
+    <script src="js/firebase-config.js"></script>
+    <script src="js/main.js"></script>
+
+    <script src="js/animation.js"></script>
+    
+    <script>
+       
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const fixedThemeToggle = document.getElementById('fixedThemeToggle');
+            const html = document.documentElement;
+            const navbarIcon = themeToggle.querySelector('i');
+            const fixedIcon = fixedThemeToggle.querySelector('i');
+
+            // Set default dark theme if no theme is set in localStorage
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            html.setAttribute('data-bs-theme', savedTheme);
+            updateIcons(savedTheme === 'dark');
+            
+            // Dispatch event for animations to update
+            document.dispatchEvent(new CustomEvent('theme-changed', {
+                detail: { theme: savedTheme }
+            }));
+
+            function toggleTheme() {
+                const currentTheme = html.getAttribute('data-bs-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                html.setAttribute('data-bs-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateIcons(newTheme === 'dark');
+                
+                // Dispatch event for animations to update
+                document.dispatchEvent(new CustomEvent('theme-changed', {
+                    detail: { theme: newTheme }
+                }));
+            }
+
+            function updateIcons(isDark) {
+                const iconClass = isDark ? 'fas fa-moon' : 'fas fa-sun';
+                navbarIcon.className = iconClass;
+                fixedIcon.className = iconClass;
+            }
+            themeToggle.addEventListener('click', toggleTheme);
+            fixedThemeToggle.addEventListener('click', toggleTheme);
+            
+          
+            const scrollFadeElements = document.querySelectorAll('.scroll-fade-in');
+            
+            function checkScroll() {
+                scrollFadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            
+
+            checkScroll();
+            
+       
+            window.addEventListener('scroll', checkScroll);
+            
+         
+            addHeroGlow();
+
+            const adminLink = document.querySelector('.admin-link');
+            if (adminLink) {
+                auth.onAuthStateChanged(async user => {
+                    if (user) {
+                        try {
+                            const isUserAdmin = await isAdmin(user);
+                            if (isUserAdmin) {
+                                
+                                adminLink.classList.remove('d-none');
+                            }
+                        } catch (error) {
+                            console.error("Error checking admin status:", error);
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,230 @@
+.admin-container {
+    display: flex;
+    min-height: calc(100vh - 56px);
+    margin-top: 56px;
+}
+
+
+.admin-sidebar {
+    width: 250px;
+    background-color: #4e73df;
+    color: white;
+    position: fixed;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    transition: all 0.3s;
+}
+
+.sidebar-header {
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header h5 {
+    margin: 0;
+    font-weight: 700;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    position: relative;
+}
+
+.sidebar-menu li a {
+    display: block;
+    padding: 0.8rem 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.sidebar-menu li a:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-menu li.active a {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+}
+
+.admin-main {
+    flex: 1;
+    margin-left: 250px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+}
+
+.admin-header {
+    margin-bottom: 1.5rem;
+}
+
+.admin-header h2 {
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+
+.stats-card {
+    border-radius: 0.35rem;
+    border: none;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+}
+
+.stats-icon {
+    opacity: 0.4;
+}
+
+/* Tables */
+.table th {
+    font-weight: 600;
+    background-color: #f8f9fc;
+    border-top: none;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(78, 115, 223, 0.05);
+}
+
+.action-btn {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+    color: white;
+    margin-right: 0.25rem;
+    transition: all 0.3s;
+}
+
+.action-btn:hover {
+    transform: scale(1.1);
+}
+
+.action-btn.view {
+    background-color: #4e73df;
+}
+
+.action-btn.edit {
+    background-color: #1cc88a;
+}
+
+.action-btn.delete {
+    background-color: #e74a3b;
+}
+
+.status-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-badge.published {
+    background-color: rgba(28, 200, 138, 0.1);
+    color: #1cc88a;
+}
+
+.status-badge.draft {
+    background-color: rgba(246, 194, 62, 0.1);
+    color: #f6c23e;
+}
+
+.status-badge.pending {
+    background-color: rgba(78, 115, 223, 0.1);
+    color: #4e73df;
+}
+
+.status-badge.completed {
+    background-color: rgba(28, 200, 138, 0.1);
+    color: #1cc88a;
+}
+
+.status-badge.cancelled {
+    background-color: rgba(231, 74, 59, 0.1);
+    color: #e74a3b;
+}
+
+.bulk-actions {
+    padding: 0.75rem;
+    background-color: #f8f9fc;
+    border-radius: 0.35rem;
+}
+
+@media (max-width: 992px) {
+    .admin-sidebar {
+        width: 100%;
+        position: relative;
+        top: 0;
+        height: auto;
+        box-shadow: none;
+    }
+    
+    .admin-main {
+        margin-left: 0;
+    }
+    
+    .admin-container {
+        flex-direction: column;
+    }
+    
+    .sidebar-menu {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .sidebar-menu li {
+        flex: 1 0 auto;
+    }
+    
+    .sidebar-menu li a {
+        text-align: center;
+        padding: 0.5rem;
+    }
+}
+
+.modal-header {
+    background-color: #4e73df;
+    color: white;
+    border-bottom: none;
+}
+
+.modal-footer {
+    border-top: none;
+}
+.form-control:focus, .form-select:focus {
+    border-color: #4e73df;
+    box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
+}
+.current-image-preview {
+    text-align: center;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #4e73df;
+    border-color: #4e73df;
+}
+
+.pagination .page-link {
+    color: #4e73df;
+}
+
+.pagination .page-link:focus {
+    box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
+} 

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="favorites-version" content="1.1">
+    <title>Favorites - ShopEase</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <style>
+      
+        .product-image {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        
+        .cart-badge {
+            position: relative;
+            top: -8px;
+        }
+        
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1050;
+        }
+
+        /* Custom Dropdown Styles */
+        .custom-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            min-width: 10rem;
+            padding: 0.5rem 0;
+            background-color: var(--bs-dark);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 0.25rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            z-index: 1050;
+        }
+
+        .custom-dropdown.show {
+            display: block;
+        }
+
+        .custom-dropdown-item {
+            display: block;
+            width: 100%;
+            padding: 0.5rem 1rem;
+            clear: both;
+            font-weight: 400;
+            color: var(--bs-light);
+            text-align: inherit;
+            text-decoration: none;
+            white-space: nowrap;
+            background-color: transparent;
+            border: 0;
+        }
+
+        .custom-dropdown-item:hover, 
+        .custom-dropdown-item:focus {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-divider {
+            height: 0;
+            margin: 0.5rem 0;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+    </style>
+</head>
+<body>
+ 
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="products.html">
+                <i class="fas fa-shopping-bag me-2"></i>ShopEase
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                            <i class="fas fa-sun"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="favorites.html">Favorites</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">
+                            <i class="fas fa-shopping-cart"></i> Cart <span id="cartCount" class="badge bg-danger cart-badge">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="userMenuContainer" style="position: relative;">
+                        <a class="nav-link d-flex align-items-center" href="#" id="userMenuButton">
+                            <i class="fas fa-user-circle me-1"></i> <span id="userName">User</span>
+                            <i class="fas fa-caret-down ms-1 small"></i>
+                        </a>
+                        <div id="userMenu" class="custom-dropdown">
+                            <a class="custom-dropdown-item" href="profile.html" id="profileLink">Profile</a>
+                            <a class="custom-dropdown-item" href="orders.html" id="ordersLink">My Orders</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="custom-dropdown-item" href="#" id="logoutBtn">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    <button class="theme-toggle theme-toggle-fixed" id="fixedThemeToggle" aria-label="Toggle theme">
+        <i class="fas fa-sun"></i>
+    </button>
+
+   
+    <section class="py-5 mt-5">
+        <div class="container">
+            <h2 class="mb-4">My Favorites</h2>
+            
+            <div id="favoritesContent">
+              
+                <div class="text-center py-5" id="loadingFavorites">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Loading favorites...</p>
+                </div>
+                
+               
+                <div id="emptyFavorites" class="text-center py-5 d-none">
+                    <i class="far fa-heart fa-4x mb-3 text-muted"></i>
+                    <h4>Your favorites list is empty</h4>
+                    <p>Save your favorite products to access them quickly later.</p>
+                    <a href="products.html" class="btn btn-primary mt-3">Browse Products</a>
+                </div>
+                <div class="row g-4" id="favoritesList">
+               
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="removeFavoriteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Remove from Favorites</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to remove this product from your favorites?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmRemoveFavorite">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">User Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="profileForm">
+                        <div class="mb-3">
+                            <label for="profileName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="profileName" value="John Doe">
+                        </div>
+                        <div class="mb-3">
+                            <label for="profileEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="profileEmail" value="john.doe@example.com" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profilePhone" class="form-label">Phone</label>
+                            <input type="tel" class="form-control" id="profilePhone" value="+1 234 567 8900">
+                        </div>
+                        <div class="mb-3">
+                            <label for="profileAddress" class="form-label">Address</label>
+                            <textarea class="form-control" id="profileAddress" rows="3">123 Main St, Anytown, USA</textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveProfileBtn">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toast-container">
+        <div id="cartToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <strong class="me-auto">Success</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Product added to cart successfully!
+            </div>
+        </div>
+        
+        <div id="favoriteToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-danger text-white">
+                <strong class="me-auto">Success</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Product removed from favorites!
+            </div>
+        </div>
+        
+        <div id="profileToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-primary text-white">
+                <strong class="me-auto">Success</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Profile updated successfully!
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>ShopEase</h5>
+                    <p>Your one-stop shopping destination for all your needs.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="products.html" class="text-white">Products</a></li>
+                        <li><a href="favorites.html" class="text-white">Favorites</a></li>
+                        <li><a href="cart.html" class="text-white">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt me-2"></i> 123 Shopping St, Retail City</p>
+                        <p><i class="fas fa-phone me-2"></i> +1 234 567 8900</p>
+                        <p><i class="fas fa-envelope me-2"></i> info@shopease.com</p>
+                    </address>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2023 ShopEase. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth-check.js"></script>
+    <script src="js/favorites.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileData = JSON.parse(localStorage.getItem('userProfile')) || {
+                name: 'John Doe',
+                email: 'john.doe@example.com',
+                phone: '+1 234 567 8900',
+                address: '123 Main St, Anytown, USA'
+            };
+            
+            // Update profile fields
+            document.getElementById('profileName').value = profileData.name;
+            document.getElementById('profileEmail').value = profileData.email;
+            document.getElementById('profilePhone').value = profileData.phone;
+            document.getElementById('profileAddress').value = profileData.address;
+            
+            const userName = document.getElementById('userName');
+            if (userName) {
+                userName.textContent = profileData.name.split(' ')[0];
+            }
+            
+           
+            const profileLink = document.getElementById('profileLink');
+            if (profileLink) {
+                profileLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const profileModal = new bootstrap.Modal(document.getElementById('profileModal'));
+                    profileModal.show();
+                });
+            }
+            
+          
+            const saveProfileBtn = document.getElementById('saveProfileBtn');
+            if (saveProfileBtn) {
+                saveProfileBtn.addEventListener('click', function() {
+                  
+                    const profileData = {
+                        name: document.getElementById('profileName').value,
+                        email: document.getElementById('profileEmail').value,
+                        phone: document.getElementById('profilePhone').value,
+                        address: document.getElementById('profileAddress').value
+                    };
+                    
+                    localStorage.setItem('userProfile', JSON.stringify(profileData));
+                
+                    const userName = document.getElementById('userName');
+                    if (userName) {
+                        userName.textContent = profileData.name.split(' ')[0];
+                    }
+                    
+                    const toast = document.createElement('div');
+                    toast.className = 'toast align-items-center text-white bg-success border-0';
+                    toast.setAttribute('role', 'alert');
+                    toast.setAttribute('aria-live', 'assertive');
+                    toast.setAttribute('aria-atomic', 'true');
+                    
+                    toast.innerHTML = `
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                Profile updated successfully!
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    `;
+                    
+                    const toastContainer = document.querySelector('.toast-container');
+                    if (toastContainer) {
+                        toastContainer.appendChild(toast);
+                        const bsToast = new bootstrap.Toast(toast);
+                        bsToast.show();
+                      
+                        toast.addEventListener('hidden.bs.toast', () => {
+                            toast.remove();
+                        });
+                    }
+                
+                    const profileModal = bootstrap.Modal.getInstance(document.getElementById('profileModal'));
+                    profileModal.hide();
+                });
+            }
+            
+            const ordersLink = document.getElementById('ordersLink');
+            if (ordersLink) {
+                ordersLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Orders page is under construction. Please check back later.');
+                });
+            }
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+            
+                    localStorage.removeItem('cart');
+                    localStorage.removeItem('favorites');
+                    localStorage.removeItem('userProfile');
+       
+                    window.location.href = 'login.html';
+                });
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const fixedThemeToggle = document.getElementById('fixedThemeToggle');
+            const html = document.documentElement;
+            const navbarIcon = themeToggle.querySelector('i');
+            const fixedIcon = fixedThemeToggle.querySelector('i');
+
+            // Set default dark theme if no theme is set in localStorage
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            html.setAttribute('data-bs-theme', savedTheme);
+            updateIcons(savedTheme === 'dark');
+
+            function toggleTheme() {
+                const currentTheme = html.getAttribute('data-bs-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                html.setAttribute('data-bs-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateIcons(newTheme === 'dark');
+            }
+
+            function updateIcons(isDark) {
+                const iconClass = isDark ? 'fas fa-moon' : 'fas fa-sun';
+                navbarIcon.className = iconClass;
+                fixedIcon.className = iconClass;
+            }
+
+            themeToggle.addEventListener('click', toggleTheme);
+            fixedThemeToggle.addEventListener('click', toggleTheme);
+
+            // Custom dropdown for user menu
+            const userMenuButton = document.getElementById('userMenuButton');
+            const userMenu = document.getElementById('userMenu');
+            
+            if (userMenuButton && userMenu) {
+                // Toggle the dropdown when the button is clicked
+                userMenuButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    userMenu.classList.toggle('show');
+                });
+                
+                // Close the dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!userMenuButton.contains(e.target) && !userMenu.contains(e.target)) {
+                        userMenu.classList.remove('show');
+                    }
+                });
+                
+                // Close the dropdown when pressing ESC key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && userMenu.classList.contains('show')) {
+                        userMenu.classList.remove('show');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html> 

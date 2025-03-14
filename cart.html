@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - ShopEase</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/animation.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="products.html">
+                <i class="fas fa-shopping-bag me-2"></i>ShopEase
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="favorites.html">Favorites</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="cart.html">
+                            <i class="fas fa-shopping-cart"></i> Cart <span id="cartCount" class="badge bg-danger">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="userMenuContainer" style="position: relative;">
+                        <a class="nav-link d-flex align-items-center" href="#" id="userMenuButton">
+                            <i class="fas fa-user-circle me-1"></i> <span id="userName">User</span>
+                            <i class="fas fa-caret-down ms-1 small"></i>
+                        </a>
+                        <div id="userMenu" class="custom-dropdown">
+                            <a class="custom-dropdown-item" href="profile.html">Profile</a>
+                            <a class="custom-dropdown-item" href="orders.html">My Orders</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="custom-dropdown-item" href="#" id="logoutBtn">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <button class="theme-toggle theme-toggle-fixed" id="fixedThemeToggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+    </button>
+    <section class="py-5 cart-section pattern-dots">
+        <div class="container">
+            <h2 class="mb-4">Shopping Cart</h2>
+            
+            <div id="cartContent">
+                
+                <div class="text-center py-5" id="loadingCart">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Loading cart...</p>
+                </div>
+                
+                <div id="emptyCart" class="text-center py-5 d-none">
+                    <i class="fas fa-shopping-cart fa-4x mb-3 text-muted"></i>
+                    <h4>Your cart is empty</h4>
+                    <p>Looks like you haven't added any products to your cart yet.</p>
+                    <a href="products.html" class="btn btn-primary mt-3 btn-shine">Continue Shopping</a>
+                </div>
+                
+                <div id="cartItems" class="d-none">
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cartItemsList">
+                             
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Have a coupon?</h5>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="couponCode" placeholder="Enter coupon code">
+                                        <button class="btn btn-outline-primary" type="button" id="applyCoupon">Apply</button>
+                                    </div>
+                                    <div id="couponMessage" class="d-none"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Order Summary</h5>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between">
+                                            <span>Subtotal</span>
+                                            <span id="subtotal">$0.00</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between">
+                                            <span>Discount</span>
+                                            <span id="discount">$0.00</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between">
+                                            <span>Shipping</span>
+                                            <span id="shipping">$0.00</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between fw-bold">
+                                            <span>Total</span>
+                                            <span id="total">$0.00</span>
+                                        </li>
+                                    </ul>
+                                    <div class="d-grid gap-2 mt-3">
+                                        <a href="checkout.html" class="btn btn-primary btn-shine">Proceed to Checkout</a>
+                                        <a href="products.html" class="btn btn-outline-secondary">Continue Shopping</a>
+                                        <button id="clearCartBtn" class="btn btn-outline-danger mt-2">
+                                            <i class="fas fa-trash"></i> Clear Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="section-divider">
+        <div class="divider-wave"></div>
+    </div>
+
+    
+    <div class="modal fade" id="removeItemModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Remove Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to remove this item from your cart?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmRemove">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+  
+    </div>
+
+   
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>ShopEase</h5>
+                    <p>Your one-stop shopping destination for all your needs.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="products.html" class="text-white">Products</a></li>
+                        <li><a href="favorites.html" class="text-white">Favorites</a></li>
+                        <li><a href="cart.html" class="text-white">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt me-2"></i> 123 Shopping St, Retail City</p>
+                        <p><i class="fas fa-phone me-2"></i> +1 234 567 8900</p>
+                        <p><i class="fas fa-envelope me-2"></i> info@shopease.com</p>
+                    </address>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2023 ShopEase. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth-check.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/animation.js"></script>
+    <script>
+       
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const fixedThemeToggle = document.getElementById('fixedThemeToggle');
+            const html = document.documentElement;
+            const navbarIcon = themeToggle.querySelector('i');
+            const fixedIcon = fixedThemeToggle.querySelector('i');
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            html.setAttribute('data-bs-theme', savedTheme);
+            updateIcons(savedTheme === 'dark');
+            
+            document.dispatchEvent(new CustomEvent('theme-changed', {
+                detail: { theme: savedTheme }
+            }));
+
+      
+            function toggleTheme() {
+                const currentTheme = html.getAttribute('data-bs-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                html.setAttribute('data-bs-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateIcons(newTheme === 'dark');
+                
+               
+                document.dispatchEvent(new CustomEvent('theme-changed', {
+                    detail: { theme: newTheme }
+                }));
+            }
+
+     
+            function updateIcons(isDark) {
+                const iconClass = isDark ? 'fas fa-moon' : 'fas fa-sun';
+                navbarIcon.className = iconClass;
+                fixedIcon.className = iconClass;
+            }
+
+     
+            themeToggle.addEventListener('click', toggleTheme);
+            fixedThemeToggle.addEventListener('click', toggleTheme);
+
+            // Custom dropdown for user menu
+            const userMenuButton = document.getElementById('userMenuButton');
+            const userMenu = document.getElementById('userMenu');
+            
+            if (userMenuButton && userMenu) {
+                // Toggle the dropdown when the button is clicked
+                userMenuButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    userMenu.classList.toggle('show');
+                });
+                
+                // Close the dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!userMenuButton.contains(e.target) && !userMenu.contains(e.target)) {
+                        userMenu.classList.remove('show');
+                    }
+                });
+                
+                // Close the dropdown when pressing ESC key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && userMenu.classList.contains('show')) {
+                        userMenu.classList.remove('show');
+                    }
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* Custom Dropdown Styles */
+        .custom-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            min-width: 10rem;
+            padding: 0.5rem 0;
+            background-color: var(--bs-dark);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 0.25rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            z-index: 1050;
+        }
+
+        .custom-dropdown.show {
+            display: block;
+        }
+
+        .custom-dropdown-item {
+            display: block;
+            width: 100%;
+            padding: 0.5rem 1rem;
+            clear: both;
+            font-weight: 400;
+            color: var(--bs-light);
+            text-align: inherit;
+            text-decoration: none;
+            white-space: nowrap;
+            background-color: transparent;
+            border: 0;
+        }
+
+        .custom-dropdown-item:hover, 
+        .custom-dropdown-item:focus {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-divider {
+            height: 0;
+            margin: 0.5rem 0;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+    </style>
+</body>
+</html> 
