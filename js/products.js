@@ -1,4 +1,3 @@
-// DOM Elements
 const productsContainer = document.getElementById('productsContainer');
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
@@ -7,8 +6,6 @@ const priceFilter = document.getElementById('priceFilter');
 const sortFilter = document.getElementById('sortFilter');
 const resetFiltersBtn = document.getElementById('resetFilters');
 const paginationContainer = document.getElementById('pagination');
-
-// Modal Elements
 const productModal = document.getElementById('productModal');
 const modalProductTitle = document.getElementById('modalProductTitle');
 const modalProductImage = document.getElementById('modalProductImage');
@@ -19,39 +16,30 @@ const modalAddToCart = document.getElementById('modalAddToCart');
 const modalAddToFavorites = document.getElementById('modalAddToFavorites');
 const cartToast = document.getElementById('cartToast');
 
-// Variables
 let currentUser = null;
 let products = [];
 let filteredProducts = [];
 let currentProduct = null;
 let currentPage = 1;
 const productsPerPage = 12;
-
-// Event Listeners
 if (searchBtn) {
     searchBtn.addEventListener('click', handleSearch);
 }
-
 if (searchInput) {
     searchInput.addEventListener('keyup', e => {
         if (e.key === 'Enter') {
-            handleSearch();
-        }
+            handleSearch();}
     });
 }
-
 if (categoryFilter) {
     categoryFilter.addEventListener('change', applyFilters);
 }
-
 if (priceFilter) {
     priceFilter.addEventListener('change', applyFilters);
 }
-
 if (sortFilter) {
     sortFilter.addEventListener('change', applyFilters);
 }
-
 if (resetFiltersBtn) {
     resetFiltersBtn.addEventListener('click', resetFilters);
 }
@@ -59,35 +47,22 @@ if (resetFiltersBtn) {
 if (modalAddToCart) {
     modalAddToCart.addEventListener('click', addToCart);
 }
-
 if (modalAddToFavorites) {
     modalAddToFavorites.addEventListener('click', toggleFavorite);
 }
-
-// Initialize
 auth.onAuthStateChanged(user => {
     if (user) {
         currentUser = user;
-        
-        // Instead of loading products from API, we'll use the hardcoded ones
         setupHardcodedProducts();
-        
-        // Check if we need to reset favorites
         if (localStorage.getItem('favorites_cleaned') !== 'true') {
-            // Clear all existing favorites to start fresh
             localStorage.setItem('favorites', JSON.stringify([]));
-            // Mark as cleaned so we don't clear user's favorites on subsequent loads
             localStorage.setItem('favorites_cleaned', 'true');
             console.log('Favorites reset: Only items you explicitly add to favorites will appear here.');
         }
     }
 });
-
-// Setup hardcoded products
 function setupHardcodedProducts() {
     console.log('Setting up hardcoded products');
-    
-    // Define hardcoded products array (matching the ones in the HTML)
     products = [
         {
             id: '1',
@@ -323,17 +298,10 @@ function setupHardcodedProducts() {
             isFavorite: false
         }
     ];
-    
-    // Check for actual favorite status in localStorage
     updateFavoriteStatus();
-    
-    // Set up event listeners for the product cards
     setupEventListeners();
 }
-
-// Setup event listeners for hardcoded product cards
 function setupEventListeners() {
-    // Add event listeners for view details buttons
     const viewButtons = document.querySelectorAll('.view-product-btn');
     viewButtons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -341,8 +309,6 @@ function setupEventListeners() {
             openProductModal(productId);
         });
     });
-    
-    // Add event listeners for add to cart buttons
     const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
     addToCartButtons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -350,8 +316,6 @@ function setupEventListeners() {
             addToCartDirect(productId, 1);
         });
     });
-    
-    // Add event listeners for favorite buttons
     const favoriteButtons = document.querySelectorAll('.favorite-btn');
     favoriteButtons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -359,29 +323,17 @@ function setupEventListeners() {
             toggleFavoriteDirect(productId, btn);
         });
     });
-    
-    // Set up filter functionality
     setupFilters();
 }
-
-// Update favorite status from localStorage
 function updateFavoriteStatus() {
-    // Get favorites from localStorage
     const favoritesList = JSON.parse(localStorage.getItem('favorites')) || [];
     const favoriteIds = favoritesList.map(item => item.id);
-    
-    // Update product isFavorite property
     products.forEach(product => {
         product.isFavorite = favoriteIds.includes(product.id);
     });
 }
-
-// Setup filters
 function setupFilters() {
-    // Initialize filteredProducts with all products
     filteredProducts = [...products];
-    
-    // Add event listeners for filters
     if (searchBtn) {
         searchBtn.addEventListener('click', handleSearch);
     }
@@ -393,7 +345,6 @@ function setupFilters() {
             }
         });
     }
-
     if (categoryFilter) {
         categoryFilter.addEventListener('change', () => {
             applyFilters();
@@ -416,35 +367,23 @@ function setupFilters() {
         resetFiltersBtn.addEventListener('click', resetFilters);
     }
 }
-
-// Apply Filters
 function applyFilters() {
-    // Get filter values
     const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
     const category = categoryFilter ? categoryFilter.value : '';
     const priceRange = priceFilter ? priceFilter.value : '';
     const sortBy = sortFilter ? sortFilter.value : 'default';
-    
-    // Hide all product cards first
     const productCards = document.querySelectorAll('#productsContainer > div[data-product-id]');
     productCards.forEach(card => {
         card.style.display = 'none';
     });
-    
-    // Filter products
     filteredProducts = products.filter(product => {
-        // Search term filter
         if (searchTerm && !product.name.toLowerCase().includes(searchTerm) && 
             !product.description.toLowerCase().includes(searchTerm)) {
             return false;
         }
-        
-        // Category filter
         if (category && product.category !== category) {
             return false;
         }
-        
-        // Price range filter
         if (priceRange) {
             const [min, max] = priceRange.split('-');
             
@@ -461,8 +400,6 @@ function applyFilters() {
         
         return true;
     });
-    
-    // Sort products
     if (sortBy !== 'default') {
         const [field, direction] = sortBy.split('-');
         
@@ -478,16 +415,12 @@ function applyFilters() {
             return 0;
         });
     }
-    
-    // Show only the filtered products
     filteredProducts.forEach(product => {
         const productCard = document.querySelector(`#productsContainer > div[data-product-id="${product.id}"]`);
         if (productCard) {
             productCard.style.display = 'block';
         }
     });
-    
-    // Show "no products found" message if no products match the filters
     if (filteredProducts.length === 0) {
         const productsContainer = document.getElementById('productsContainer');
         const noProductsMessage = document.createElement('div');
@@ -499,70 +432,47 @@ function applyFilters() {
             <p>Try adjusting your search or filter criteria.</p>
             <button class="btn btn-primary mt-3" id="clearFiltersBtn">Clear Filters</button>
         `;
-        
-        // Remove previous message if it exists
         const existingMessage = document.getElementById('noProductsMessage');
         if (existingMessage) {
             existingMessage.remove();
         }
         
         productsContainer.appendChild(noProductsMessage);
-        
-        // Add event listener to the clear filters button
         const clearFiltersBtn = document.getElementById('clearFiltersBtn');
         if (clearFiltersBtn) {
             clearFiltersBtn.addEventListener('click', resetFilters);
         }
     } else {
-        // Remove the "no products found" message if it exists
         const noProductsMessage = document.getElementById('noProductsMessage');
         if (noProductsMessage) {
             noProductsMessage.remove();
         }
     }
 }
-
-// Handle Search
 function handleSearch() {
     applyFilters();
 }
-
-// Reset Filters
 function resetFilters() {
     if (searchInput) searchInput.value = '';
     if (categoryFilter) categoryFilter.value = '';
     if (priceFilter) priceFilter.value = '';
     if (sortFilter) sortFilter.value = 'default';
-    
-    // Show all product cards
     const productCards = document.querySelectorAll('#productsContainer > div[data-product-id]');
     productCards.forEach(card => {
         card.style.display = 'block';
     });
-    
-    // Reset filtered products
     filteredProducts = [...products];
-    
-    // Remove the "no products found" message if it exists
     const noProductsMessage = document.getElementById('noProductsMessage');
     if (noProductsMessage) {
         noProductsMessage.remove();
     }
 }
-
-// Render Products
 function renderProducts() {
     if (!productsContainer) return;
-    
-    // Calculate pagination
     const startIndex = (currentPage - 1) * productsPerPage;
     const endIndex = startIndex + productsPerPage;
     const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
-    
-    // Clear container
     productsContainer.innerHTML = '';
-    
-    // Check if no products
     if (filteredProducts.length === 0) {
         productsContainer.innerHTML = `
             <div class="col-12 text-center py-5">
@@ -580,8 +490,6 @@ function renderProducts() {
         
         return;
     }
-    
-    // Render products
     paginatedProducts.forEach((product, index) => {
         const productCard = document.createElement('div');
         productCard.className = 'col-md-4 col-lg-3 mb-4';
@@ -592,8 +500,6 @@ function renderProducts() {
         
         productsContainer.appendChild(productCard);
     });
-    
-    // Add event listeners
     const viewProductBtns = document.querySelectorAll('.view-product-btn');
     const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
     const favoriteBtns = document.querySelectorAll('.favorite-btn');
@@ -648,25 +554,13 @@ function renderProductCard(product) {
         </div>
     `;
 }
-
-// Render Pagination
 function renderPagination() {
     if (!paginationContainer) return;
-    
-    // Clear container
     paginationContainer.innerHTML = '';
-    
-    // Calculate total pages
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
-    
-    // Check if pagination is needed
     if (totalPages <= 1) return;
-    
-    // Create pagination
     const pagination = document.createElement('ul');
     pagination.className = 'pagination';
-    
-    // Previous button
     const prevLi = document.createElement('li');
     prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
     
@@ -685,11 +579,8 @@ function renderPagination() {
             window.scrollTo(0, 0);
         }
     });
-    
     prevLi.appendChild(prevLink);
     pagination.appendChild(prevLi);
-    
-    // Page numbers
     const maxPages = 5;
     let startPage = Math.max(1, currentPage - Math.floor(maxPages / 2));
     let endPage = Math.min(totalPages, startPage + maxPages - 1);
@@ -697,7 +588,6 @@ function renderPagination() {
     if (endPage - startPage + 1 < maxPages) {
         startPage = Math.max(1, endPage - maxPages + 1);
     }
-    
     for (let i = startPage; i <= endPage; i++) {
         const pageLi = document.createElement('li');
         pageLi.className = `page-item ${i === currentPage ? 'active' : ''}`;
@@ -718,8 +608,6 @@ function renderPagination() {
         pageLi.appendChild(pageLink);
         pagination.appendChild(pageLi);
     }
-    
-    // Next button
     const nextLi = document.createElement('li');
     nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
     
@@ -741,19 +629,11 @@ function renderPagination() {
     
     nextLi.appendChild(nextLink);
     pagination.appendChild(nextLi);
-    
-    // Append pagination
     paginationContainer.appendChild(pagination);
 }
-
-// Open Product Modal
 function openProductModal(productId) {
-    // Find product
     currentProduct = products.find(product => product.id === productId);
-    
     if (!currentProduct) return;
-    
-    // Update modal content
     modalProductTitle.textContent = currentProduct.name;
     modalProductImage.src = currentProduct.imageUrl;
     modalProductImage.alt = currentProduct.name;
@@ -761,7 +641,6 @@ function openProductModal(productId) {
     modalProductDescription.textContent = currentProduct.description;
     modalQuantity.value = 1;
     
-    // Update favorite button
     if (currentProduct.isFavorite) {
         modalAddToFavorites.innerHTML = '<i class="fas fa-heart me-2"></i>Remove from Favorites';
         modalAddToFavorites.classList.add('btn-danger');
@@ -771,13 +650,9 @@ function openProductModal(productId) {
         modalAddToFavorites.classList.remove('btn-danger');
         modalAddToFavorites.classList.add('btn-outline-danger');
     }
-    
-    // Show modal
     const modal = new bootstrap.Modal(productModal);
     modal.show();
 }
-
-// Add to Cart
 async function addToCart() {
     if (!currentProduct) return;
     
@@ -785,24 +660,17 @@ async function addToCart() {
     
     try {
         showLoading();
-        
-        // Get user's cart
         const cartRef = db.collection('carts').doc(currentUser.uid);
         const cartSnapshot = await cartRef.get();
         
         if (cartSnapshot.exists) {
-            // Update existing cart
             const cartData = cartSnapshot.data();
             const cartItems = cartData.items || [];
-            
-            // Check if product already in cart
             const existingItemIndex = cartItems.findIndex(item => item.productId === currentProduct.id);
             
             if (existingItemIndex !== -1) {
-                // Update quantity
                 cartItems[existingItemIndex].quantity += quantity;
             } else {
-                // Add new item
                 cartItems.push({
                     productId: currentProduct.id,
                     name: currentProduct.name,
@@ -812,14 +680,12 @@ async function addToCart() {
                     addedAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
             }
-            
-            // Update cart
             await cartRef.update({
                 items: cartItems,
                 updatedAt: firebase.firestore.FieldValue.serverTimestamp()
             });
         } else {
-            // Create new cart
+   
             await cartRef.set({
                 userId: currentUser.uid,
                 items: [{
@@ -836,15 +702,9 @@ async function addToCart() {
         }
         
         hideLoading();
-        
-        // Show success toast
         const toast = new bootstrap.Toast(cartToast);
         toast.show();
-        
-        // Update cart count
         updateCartCount(currentUser.uid);
-        
-        // Close modal
         const modal = bootstrap.Modal.getInstance(productModal);
         modal.hide();
     } catch (error) {
@@ -853,8 +713,6 @@ async function addToCart() {
         showToast('Failed to add product to cart. Please try again.', 'danger');
     }
 }
-
-// Add to Cart Direct
 async function addToCartDirect(productId, quantity) {
     const product = products.find(p => p.id === productId);
     
@@ -862,18 +720,12 @@ async function addToCartDirect(productId, quantity) {
     
     try {
         showLoading();
-        
-        // Get cart from localStorage
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        
-        // Check if product already in cart
         const existingItemIndex = cart.findIndex(item => item.id === product.id);
         
         if (existingItemIndex !== -1) {
-            // Update quantity
             cart[existingItemIndex].quantity += quantity;
         } else {
-            // Add new item
             cart.push({
                 id: product.id,
                 name: product.name,
@@ -882,16 +734,10 @@ async function addToCartDirect(productId, quantity) {
                 quantity: quantity
             });
         }
-        
-        // Save to localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
         
         hideLoading();
-        
-        // Show success toast
         showToast('Product added to cart successfully!', 'success');
-        
-        // Update cart count
         const cartCount = document.getElementById('cartCount');
         if (cartCount) {
             const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
@@ -903,38 +749,28 @@ async function addToCartDirect(productId, quantity) {
         showToast('Failed to add product to cart. Please try again.', 'danger');
     }
 }
-
-// Toggle Favorite
 async function toggleFavorite() {
     if (!currentProduct) return;
     
     try {
         showLoading();
-        
-        // Get user's favorites
         const favoritesRef = db.collection('favorites').doc(currentUser.uid);
         const favoritesSnapshot = await favoritesRef.get();
         
         if (favoritesSnapshot.exists) {
-            // Update existing favorites
             const favoritesData = favoritesSnapshot.data();
             let productIds = favoritesData.productIds || [];
             
             if (currentProduct.isFavorite) {
-                // Remove from favorites
                 productIds = productIds.filter(id => id !== currentProduct.id);
             } else {
-                // Add to favorites
                 productIds.push(currentProduct.id);
             }
-            
-            // Update favorites
             await favoritesRef.update({
                 productIds: productIds,
                 updatedAt: firebase.firestore.FieldValue.serverTimestamp()
             });
         } else {
-            // Create new favorites
             await favoritesRef.set({
                 userId: currentUser.uid,
                 productIds: [currentProduct.id],
@@ -942,25 +778,17 @@ async function toggleFavorite() {
                 updatedAt: firebase.firestore.FieldValue.serverTimestamp()
             });
         }
-        
-        // Update product
         currentProduct.isFavorite = !currentProduct.isFavorite;
-        
-        // Update products array
         const productIndex = products.findIndex(p => p.id === currentProduct.id);
         if (productIndex !== -1) {
             products[productIndex].isFavorite = currentProduct.isFavorite;
         }
-        
-        // Update filtered products array
         const filteredProductIndex = filteredProducts.findIndex(p => p.id === currentProduct.id);
         if (filteredProductIndex !== -1) {
             filteredProducts[filteredProductIndex].isFavorite = currentProduct.isFavorite;
         }
         
         hideLoading();
-        
-        // Update modal
         if (currentProduct.isFavorite) {
             modalAddToFavorites.innerHTML = '<i class="fas fa-heart me-2"></i>Remove from Favorites';
             modalAddToFavorites.classList.add('btn-danger');
@@ -972,8 +800,6 @@ async function toggleFavorite() {
             modalAddToFavorites.classList.add('btn-outline-danger');
             showToast('Product removed from favorites.', 'info');
         }
-        
-        // Re-render products
         renderProducts();
     } catch (error) {
         hideLoading();
@@ -981,8 +807,6 @@ async function toggleFavorite() {
         showToast('Failed to update favorites. Please try again.', 'danger');
     }
 }
-
-// Toggle Favorite Direct
 async function toggleFavoriteDirect(productId, buttonElement) {
     const product = products.find(p => p.id === productId);
     
@@ -990,20 +814,14 @@ async function toggleFavoriteDirect(productId, buttonElement) {
     
     try {
         showLoading();
-        
-        // Get favorites from localStorage
         let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        
-        // Check if product is already in favorites
         const existingIndex = favorites.findIndex(fav => fav.id === product.id);
         const isCurrentlyFavorite = existingIndex !== -1;
         
         if (isCurrentlyFavorite) {
-            // Remove from favorites
             favorites = favorites.filter(fav => fav.id !== product.id);
             product.isFavorite = false;
         } else {
-            // Add to favorites
             favorites.push({
                 ...product,
                 isFavorite: true,
@@ -1011,11 +829,7 @@ async function toggleFavoriteDirect(productId, buttonElement) {
             });
             product.isFavorite = true;
         }
-        
-        // Save to localStorage
         localStorage.setItem('favorites', JSON.stringify(favorites));
-        
-        // Update button
         if (buttonElement) {
             const icon = buttonElement.querySelector('i');
             if (icon) {
@@ -1032,8 +846,6 @@ async function toggleFavoriteDirect(productId, buttonElement) {
         }
         
         hideLoading();
-        
-        // Show toast
         if (product.isFavorite) {
             showToast('Product added to favorites!', 'success');
         } else {

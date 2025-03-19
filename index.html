@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopEase - Your One-Stop Shopping Destination</title>
-
+    <title>ShopEase-Your One-Stop Shopping Destination</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -406,13 +405,9 @@
             const html = document.documentElement;
             const navbarIcon = themeToggle.querySelector('i');
             const fixedIcon = fixedThemeToggle.querySelector('i');
-
-            // Set default dark theme if no theme is set in localStorage
             const savedTheme = localStorage.getItem('theme') || 'dark';
             html.setAttribute('data-bs-theme', savedTheme);
             updateIcons(savedTheme === 'dark');
-            
-            // Dispatch event for animations to update
             document.dispatchEvent(new CustomEvent('theme-changed', {
                 detail: { theme: savedTheme }
             }));
@@ -424,8 +419,6 @@
                 html.setAttribute('data-bs-theme', newTheme);
                 localStorage.setItem('theme', newTheme);
                 updateIcons(newTheme === 'dark');
-                
-                // Dispatch event for animations to update
                 document.dispatchEvent(new CustomEvent('theme-changed', {
                     detail: { theme: newTheme }
                 }));

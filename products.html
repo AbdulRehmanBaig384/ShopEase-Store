@@ -4,19 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products - ShopEase</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
-    <!-- Theme CSS -->
     <link rel="stylesheet" href="css/theme.css">
-    <!-- Animation CSS -->
     <link rel="stylesheet" href="css/animation.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="products.html">
@@ -62,15 +56,14 @@
         </div>
     </nav>
 
-    <!-- Fixed Theme Toggle Button -->
+
     <button class="theme-toggle theme-toggle-fixed" id="fixedThemeToggle" aria-label="Toggle theme">
         <i class="fas fa-moon"></i>
     </button>
 
-    <!-- Products Section -->
     <section class="py-5 products-section pattern-dots">
         <div class="container">
-            <!-- Page Header -->
+       
             <div class="row mb-4">
                 <div class="col-md-6">
                     <h2>Our Products</h2>
@@ -85,7 +78,6 @@
                 </div>
             </div>
 
-            <!-- Filters -->
             <div class="row mb-4">
                 <div class="col-12">
                     <div class="card">
@@ -126,7 +118,6 @@
                 </div>
             </div>
 
-            <!-- Products Grid -->
             <div class="row g-4" id="productsContainer">
                 <div class="col-md-4" data-product-id="1">
                     <div class="card product-card">
@@ -335,7 +326,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Additional Products (10-18) -->
+
                 <div class="col-md-4" data-product-id="10">
                     <div class="card product-card">
                         <img src="images/laptop1.jpg" class="card-img-top" alt="Premium Laptop">
@@ -617,21 +608,18 @@
                 </div>
             </div>
 
-            <!-- Pagination -->
             <nav class="mt-5">
                 <ul class="pagination justify-content-center" id="pagination">
-                    <!-- Pagination will be dynamically loaded here -->
+           
                 </ul>
             </nav>
         </div>
     </section>
 
-    <!-- Section Divider -->
     <div class="section-divider">
         <div class="divider-wave"></div>
     </div>
 
-    <!-- Product Quick View Modal -->
     <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -666,7 +654,6 @@
         </div>
     </div>
 
-    <!-- Add to Cart Toast -->
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
         <div id="cartToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header bg-success text-white">
@@ -679,7 +666,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-dark text-white py-4">
         <div class="container">
             <div class="row">
@@ -711,39 +697,30 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-    <!-- Custom JS -->
     <script src="js/firebase-config.js"></script>
     <script src="js/auth-check.js"></script>
     <script src="js/products.js"></script>
     <script src="js/cart.js"></script>
-    <!-- Animation JS -->
     <script src="js/animation.js"></script>
     <script>
-        // Theme Toggle Functionality
         document.addEventListener('DOMContentLoaded', function() {
             const themeToggle = document.getElementById('themeToggle');
             const fixedThemeToggle = document.getElementById('fixedThemeToggle');
             const html = document.documentElement;
             const navbarIcon = themeToggle.querySelector('i');
             const fixedIcon = fixedThemeToggle.querySelector('i');
-
-            // Set default dark theme if no theme is set in localStorage
             const savedTheme = localStorage.getItem('theme') || 'dark';
             html.setAttribute('data-bs-theme', savedTheme);
             updateIcons(savedTheme === 'dark');
-            
-            // Dispatch event for animations to update
+
             document.dispatchEvent(new CustomEvent('theme-changed', {
                 detail: { theme: savedTheme }
             }));
 
-            // Toggle theme function
             function toggleTheme() {
                 const currentTheme = html.getAttribute('data-bs-theme');
                 const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -752,42 +729,33 @@
                 localStorage.setItem('theme', newTheme);
                 updateIcons(newTheme === 'dark');
                 
-                // Dispatch event for animations to update
                 document.dispatchEvent(new CustomEvent('theme-changed', {
                     detail: { theme: newTheme }
                 }));
             }
 
-            // Update icons based on theme
             function updateIcons(isDark) {
                 const iconClass = isDark ? 'fas fa-moon' : 'fas fa-sun';
                 navbarIcon.className = iconClass;
                 fixedIcon.className = iconClass;
             }
-
-            // Add event listeners to both toggle buttons
             themeToggle.addEventListener('click', toggleTheme);
             fixedThemeToggle.addEventListener('click', toggleTheme);
 
-            // Custom dropdown for user menu
             const userMenuButton = document.getElementById('userMenuButton');
             const userMenu = document.getElementById('userMenu');
             
             if (userMenuButton && userMenu) {
-                // Toggle the dropdown when the button is clicked
                 userMenuButton.addEventListener('click', function(e) {
                     e.preventDefault();
                     userMenu.classList.toggle('show');
                 });
-                
-                // Close the dropdown when clicking outside
                 document.addEventListener('click', function(e) {
                     if (!userMenuButton.contains(e.target) && !userMenu.contains(e.target)) {
                         userMenu.classList.remove('show');
                     }
                 });
-                
-                // Close the dropdown when pressing ESC key
+          
                 document.addEventListener('keydown', function(e) {
                     if (e.key === 'Escape' && userMenu.classList.contains('show')) {
                         userMenu.classList.remove('show');
@@ -797,7 +765,6 @@
         });
     </script>
 
-    <!-- Add this style to ensure the dropdown is visible when .show class is applied -->
     <style>
         .dropdown-menu.show {
             display: block !important;
@@ -818,13 +785,11 @@
             border-bottom: 0;
             border-left: 0.3em solid transparent;
         }
-        
-        /* Fix any potential z-index issues */
+ 
         .navbar {
             z-index: 1030;
         }
 
-        /* Custom Dropdown Styles */
         .custom-dropdown {
             display: none;
             position: absolute;

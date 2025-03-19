@@ -1,4 +1,3 @@
-// DOM Elements
 const loadingCart = document.getElementById('loadingCart');
 const emptyCart = document.getElementById('emptyCart');
 const cartItems = document.getElementById('cartItems');
@@ -14,57 +13,43 @@ const confirmRemove = document.getElementById('confirmRemove');
 const removeItemModal = document.getElementById('removeItemModal');
 const clearCartBtn = document.getElementById('clearCartBtn');
 
-// Variables
 let cart = [];
 let itemToRemove = null;
 let discount = 0;
 const shippingCost = 5.99;
-
-// Event Listeners
 if (applyCoupon) {
     applyCoupon.addEventListener('click', handleApplyCoupon);
 }
-
 if (confirmRemove) {
     confirmRemove.addEventListener('click', confirmRemoveItem);
 }
-
 if (clearCartBtn) {
     clearCartBtn.addEventListener('click', clearCart);
 }
-
-// Initialize
 document.addEventListener('DOMContentLoaded', () => {
     loadCart();
     updateCartCount();
 });
 
-// Load Cart
 function loadCart() {
     if (!loadingCart || !emptyCart || !cartItems) return;
     
     try {
-        // Show loading
+  
         loadingCart.classList.remove('d-none');
         emptyCart.classList.add('d-none');
         cartItems.classList.add('d-none');
         
-        // Get cart from localStorage
         cart = JSON.parse(localStorage.getItem('cart')) || [];
         
         if (cart.length > 0) {
-            // Render cart items
             renderCartItems();
-            
-            // Calculate totals
             calculateTotals();
-            
-            // Show cart items
+
             loadingCart.classList.add('d-none');
             emptyCart.classList.add('d-none');
             cartItems.classList.remove('d-none');
         } else {
-            // Show empty cart
             loadingCart.classList.add('d-none');
             emptyCart.classList.remove('d-none');
             cartItems.classList.add('d-none');
@@ -72,22 +57,16 @@ function loadCart() {
     } catch (error) {
         console.error('Error loading cart:', error);
         showToast('Failed to load cart. Please try again.', 'danger');
-        
-        // Show empty cart
+
         loadingCart.classList.add('d-none');
         emptyCart.classList.remove('d-none');
         cartItems.classList.add('d-none');
     }
 } 
-
-// Render Cart Items
 function renderCartItems() {
     if (!cartItemsList) return;
-    
-    // Clear container
     cartItemsList.innerHTML = '';
-    
-    // Render items
+
     cart.forEach((item, index) => {
         const itemTotal = item.price * item.quantity;
         
@@ -121,11 +100,9 @@ function renderCartItems() {
         cartItemsList.appendChild(tr);
     });
     
-    // Add event listeners
     addEventListeners();
 }
 
-// Add event listeners
 function addEventListeners() {
     const decreaseButtons = document.querySelectorAll('.decrease-quantity');
     const increaseButtons = document.querySelectorAll('.increase-quantity');
@@ -161,26 +138,16 @@ function addEventListeners() {
         });
     });
 }
-
-// Update Item Quantity
 function updateItemQuantity(index, quantity) {
     if (quantity < 1) quantity = 1;
     if (quantity > 10) quantity = 10;
     
     try {
-        // Update quantity
         cart[index].quantity = quantity;
-        
-        // Save to localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
-        
-        // Re-render cart items
+   
         renderCartItems();
-        
-        // Recalculate totals
         calculateTotals();
-        
-        // Update cart count
         updateCartCount();
         
         showToast('Cart updated successfully!', 'success');
@@ -189,35 +156,22 @@ function updateItemQuantity(index, quantity) {
         showToast('Failed to update quantity. Please try again.', 'danger');
     }
 }
-
-// Remove Item
 function confirmRemoveItem() {
     if (itemToRemove === null) return;
     
     try {
-        // Remove item from cart
         cart.splice(itemToRemove, 1);
-        
-        // Save to localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
-        
-        // Close modal
         const modal = bootstrap.Modal.getInstance(removeItemModal);
         modal.hide();
-        
-        // Update cart count
+  
         updateCartCount();
-        
-        // Check if cart is empty
         if (cart.length === 0) {
             loadingCart.classList.add('d-none');
             emptyCart.classList.remove('d-none');
             cartItems.classList.add('d-none');
         } else {
-            // Re-render cart items
             renderCartItems();
-            
-            // Recalculate totals
             calculateTotals();
         }
         
@@ -226,12 +180,8 @@ function confirmRemoveItem() {
         console.error('Error removing item:', error);
         showToast('Failed to remove item. Please try again.', 'danger');
     }
-    
-    // Reset item to remove
     itemToRemove = null;
 }
-
-// Apply Coupon
 function handleApplyCoupon() {
     const code = couponCode.value.trim().toUpperCase();
     
@@ -239,14 +189,12 @@ function handleApplyCoupon() {
         showCouponMessage('Please enter a coupon code.', 'warning');
         return;
     }
-    
-    // Check coupon code
     if (code === 'WELCOME10') {
-        discount = 0.1; // 10% discount
+        discount = 0.1; 
         showCouponMessage('Coupon applied: 10% discount', 'success');
         calculateTotals();
     } else if (code === 'SAVE20') {
-        discount = 0.2; // 20% discount
+        discount = 0.2; 
         showCouponMessage('Coupon applied: 20% discount', 'success');
         calculateTotals();
     } else {
@@ -255,8 +203,6 @@ function handleApplyCoupon() {
         calculateTotals();
     }
 }
-
-// Show Coupon Message
 function showCouponMessage(message, type) {
     if (!couponMessage) return;
     
@@ -264,28 +210,18 @@ function showCouponMessage(message, type) {
     couponMessage.className = `alert alert-${type} mt-2`;
     couponMessage.classList.remove('d-none');
 }
-
-// Calculate Totals
 function calculateTotals() {
     if (!subtotalElement || !discountElement || !shippingElement || !totalElement) return;
     
-    // Calculate subtotal
     const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-    
-    // Calculate discount amount
+
     const discountAmount = subtotal * discount;
-    
-    // Calculate total
     const total = subtotal - discountAmount + shippingCost;
-    
-    // Update elements
     subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
     discountElement.textContent = `-$${discountAmount.toFixed(2)}`;
     shippingElement.textContent = `$${shippingCost.toFixed(2)}`;
     totalElement.textContent = `$${total.toFixed(2)}`;
 }
-
-// Update cart count
 function updateCartCount() {
     const cartCount = document.getElementById('cartCount');
     if (cartCount) {
@@ -294,8 +230,6 @@ function updateCartCount() {
         cartCount.classList.toggle('d-none', count === 0);
     }
 }
-
-// Show toast function
 function showToast(message, type = 'success') {
     const toast = document.createElement('div');
     toast.className = `toast align-items-center text-white bg-${type} border-0`;
@@ -319,30 +253,21 @@ function showToast(message, type = 'success') {
     
     const bsToast = new bootstrap.Toast(toast);
     bsToast.show();
-    
-    // Remove toast after it's hidden
     toast.addEventListener('hidden.bs.toast', () => {
         toastContainer.remove();
     });
 }
-
-// Clear Cart Function
 function clearCart() {
     try {
-        // Empty the cart array
         cart = [];
         
-        // Update localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
-        
-        // Show empty cart UI
+
         if (loadingCart && emptyCart && cartItems) {
             loadingCart.classList.add('d-none');
             emptyCart.classList.remove('d-none');
             cartItems.classList.add('d-none');
         }
-        
-        // Update cart count
         updateCartCount();
         
         showToast('Your cart has been cleared.', 'success');

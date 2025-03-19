@@ -16,30 +16,24 @@
             object-fit: cover;
             width: 100%;
         }
-        
         .product-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             height: 100%;
         }
-        
         .product-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
         }
-        
         .cart-badge {
             position: relative;
             top: -8px;
         }
-        
         .toast-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 1050;
         }
-
-        /* Custom Dropdown Styles */
         .custom-dropdown {
             display: none;
             position: absolute;
@@ -296,8 +290,6 @@
                 phone: '+1 234 567 8900',
                 address: '123 Main St, Anytown, USA'
             };
-            
-            // Update profile fields
             document.getElementById('profileName').value = profileData.name;
             document.getElementById('profileEmail').value = profileData.email;
             document.getElementById('profilePhone').value = profileData.phone;
@@ -395,8 +387,6 @@
             const html = document.documentElement;
             const navbarIcon = themeToggle.querySelector('i');
             const fixedIcon = fixedThemeToggle.querySelector('i');
-
-            // Set default dark theme if no theme is set in localStorage
             const savedTheme = localStorage.getItem('theme') || 'dark';
             html.setAttribute('data-bs-theme', savedTheme);
             updateIcons(savedTheme === 'dark');
@@ -418,26 +408,19 @@
 
             themeToggle.addEventListener('click', toggleTheme);
             fixedThemeToggle.addEventListener('click', toggleTheme);
-
-            // Custom dropdown for user menu
             const userMenuButton = document.getElementById('userMenuButton');
             const userMenu = document.getElementById('userMenu');
             
             if (userMenuButton && userMenu) {
-                // Toggle the dropdown when the button is clicked
                 userMenuButton.addEventListener('click', function(e) {
                     e.preventDefault();
                     userMenu.classList.toggle('show');
                 });
-                
-                // Close the dropdown when clicking outside
                 document.addEventListener('click', function(e) {
                     if (!userMenuButton.contains(e.target) && !userMenu.contains(e.target)) {
                         userMenu.classList.remove('show');
                     }
                 });
-                
-                // Close the dropdown when pressing ESC key
                 document.addEventListener('keydown', function(e) {
                     if (e.key === 'Escape' && userMenu.classList.contains('show')) {
                         userMenu.classList.remove('show');
