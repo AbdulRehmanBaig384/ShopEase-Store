@@ -2,7 +2,8 @@
 
 Welcome to ShopEase, a powerful and user-friendly e-commerce platform designed for seamless shopping. Built using HTML, CSS, Bootstrap, JavaScript, and Firebase, ShopEase provides a smooth, responsive, and secure experience for users.
 
-🚀 Live Demo: shopeasywebsite1.netlify.app
+🚀 Live Demo: https://shopeasywebsite1.netlify.app/
+
 ---
 
 ✨ Features
