@@ -117,6 +117,7 @@ ShopEase/
 │
 ├── README.md             # Project documentation
 └── LICENSE               # License file
+
 ---
 
 🎯 Future Enhancements
