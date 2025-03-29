@@ -124,10 +124,10 @@ ShopEase/
 🎯 Future Enhancements
 
 🚀 Planned Features:
-✅ Payment Integration – Support for PayPal, Stripe, etc.
-✅ Wishlist Feature – Users can save favorite products.
-✅ Admin Dashboard – Manage products, users, and orders efficiently.
-✅ Order Tracking System – Live tracking with Firebase functions.
+✅ Payment Integration – Support for PayPal, Stripe, etc.<br>
+✅ Wishlist Feature – Users can save favorite products.<br>
+✅ Admin Dashboard – Manage products, users, and orders efficiently.<br>
+✅ Order Tracking System – Live tracking with Firebase functions.<br>
 
 
 ---
