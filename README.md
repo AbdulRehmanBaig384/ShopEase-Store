@@ -43,7 +43,7 @@ JavaScript – Adds interactivity and functionality..<br>
 
 Firebase Authentication – Handles secure user authentication..<br>
 
-Firebase Firestore – Stores and manages application data in real-time..<br>
+Firebase Firestore – Stores and manages 
 
 
 
