@@ -43,9 +43,6 @@ JavaScript – Adds interactivity and functionality..<br>
 
 Firebase Authentication – Handles secure user authentication..<br>
 
-Firebase Firestore – Stores
-
-
 
 ---
 
