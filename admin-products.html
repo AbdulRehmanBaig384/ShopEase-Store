@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="css/theme.css">
 </head>
 <body>
-  
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="admin.html">
@@ -186,8 +185,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="modal fade" id="addProductModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -251,7 +248,6 @@
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="editProductModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -321,7 +317,6 @@
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="deleteProductModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -340,7 +335,6 @@
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
@@ -362,8 +356,6 @@
                 html.setAttribute('data-bs-theme', savedTheme);
                 updateIcons(savedTheme === 'dark');
             }
-
-            
             function toggleTheme() {
                 const currentTheme = html.getAttribute('data-bs-theme');
                 const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -372,15 +364,11 @@
                 localStorage.setItem('theme', newTheme);
                 updateIcons(newTheme === 'dark');
             }
-
-          
             function updateIcons(isDark) {
                 const iconClass = isDark ? 'fas fa-moon' : 'fas fa-sun';
                 navbarIcon.className = iconClass;
                 fixedIcon.className = iconClass;
             }
-
-     
             themeToggle.addEventListener('click', toggleTheme);
             fixedThemeToggle.addEventListener('click', toggleTheme);
         });
