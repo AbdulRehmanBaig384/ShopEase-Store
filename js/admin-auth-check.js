@@ -1,22 +1,13 @@
-// DOM Elements
 const adminLogoutBtn = document.getElementById('adminLogoutBtn');
 const adminNameElement = document.getElementById('adminName');
-
-
 if (adminLogoutBtn) {
     adminLogoutBtn.addEventListener('click', handleAdminLogout);
 }
-
 async function handleAdminLogout(e) {
-    e.preventDefault();
-    
+    e.preventDefault();   
     try {
         showLoading();
-        
-       
         await auth.signOut();
-        
-       
         window.location.href = 'login.html';
     } catch (error) {
         hideLoading();
@@ -24,8 +15,6 @@ async function handleAdminLogout(e) {
         showToast('Failed to logout. Please try again.', 'danger');
     }
 }
-
-
 auth.onAuthStateChanged(async user => {
     if (user) {
         const isUserAdmin = await isAdmin(user);
