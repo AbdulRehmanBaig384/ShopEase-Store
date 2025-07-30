@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initMouseEffects();
     addButtonShine();
 });
-
-// Create floating particles
 function initParticles() {
     const particlesContainer = document.createElement('div');
     particlesContainer.className = 'particles-background';
@@ -26,8 +24,6 @@ function initParticles() {
         particlesContainer.appendChild(particle);
     }
 }
-
-
 function initWaves() {
     const waveContainer = document.createElement('div');
     waveContainer.className = 'wave-background';
@@ -39,8 +35,6 @@ function initWaves() {
         waveContainer.appendChild(wave);
     }
 }
-
-
 function initMouseEffects() {
   
     if (window.innerWidth < 768) return;
@@ -54,15 +48,11 @@ function initMouseEffects() {
     document.body.appendChild(cursorOutline);
     
     document.addEventListener('mousemove', function(e) {
-
         cursorDot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-        
-        
         setTimeout(() => {
             cursorOutline.style.transform = `translate(${e.clientX - 15}px, ${e.clientY - 15}px)`;
         }, 50);
     });
- 
     const interactiveElements = document.querySelectorAll('a, button, .card, input, .nav-link');
     interactiveElements.forEach(element => {
         element.addEventListener('mouseenter', () => {
@@ -77,8 +67,6 @@ function initMouseEffects() {
         });
     });
 }
-
-
 function addButtonShine() {
     const primaryButtons = document.querySelectorAll('.btn-primary');
     primaryButtons.forEach(button => {
@@ -95,14 +83,11 @@ function addHeroGlow() {
         heroSection.appendChild(glow);
     }
 }
-
 function addSectionDividers() {
     const sections = document.querySelectorAll('section');
-    
     for (let i = 0; i < sections.length - 1; i++) {
         const divider = document.createElement('div');
         divider.className = 'section-divider';
-        
         const wave = document.createElement('div');
         wave.className = 'divider-wave';
         divider.appendChild(wave);
@@ -110,12 +95,10 @@ function addSectionDividers() {
         sections[i].after(divider);
     }
 }
-
 document.addEventListener('theme-changed', function(e) {
     const theme = e.detail.theme;
     console.log(`Theme changed to ${theme}`);
 });
-
 function checkReducedMotion() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         const styleSheet = document.createElement('style');
@@ -123,10 +106,7 @@ function checkReducedMotion() {
             .particle, .wave, .hero-glow, .btn-shine::after {
                 animation: none !important;
                 transition: none !important;
-            }
-        `;
+            }`;
         document.head.appendChild(styleSheet);
-    }
-}
-
+    }}
 checkReducedMotion(); 
