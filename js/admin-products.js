@@ -1,4 +1,3 @@
-// DOM Elements
 const productsList = document.getElementById('productsList');
 const productsPagination = document.getElementById('productsPagination');
 const searchProduct = document.getElementById('searchProduct');
@@ -11,35 +10,26 @@ const bulkActionsContainer = document.getElementById('bulkActionsContainer');
 const bulkPublish = document.getElementById('bulkPublish');
 const bulkDraft = document.getElementById('bulkDraft');
 const bulkDelete = document.getElementById('bulkDelete');
-
-// Add Product Form
 const addProductForm = document.getElementById('addProductForm');
 const saveProductBtn = document.getElementById('saveProductBtn');
 const productImageUpload = document.getElementById('productImageUpload');
-
-// Edit Product Form
 const editProductForm = document.getElementById('editProductForm');
 const editProductId = document.getElementById('editProductId');
 const updateProductBtn = document.getElementById('updateProductBtn');
 const editProductImageUpload = document.getElementById('editProductImageUpload');
 const currentProductImage = document.getElementById('currentProductImage');
 
-// Delete Product Modal
 const deleteProductId = document.getElementById('deleteProductId');
 const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
 
-// Variables
 let products = [];
 let filteredProducts = [];
 let selectedProducts = [];
 let currentPage = 1;
 const productsPerPage = 10;
 
-// Event Listeners
 if (searchBtn) {
-    searchBtn.addEventListener('click', handleSearch);
-}
-
+    searchBtn.addEventListener('click', handleSearch);}
 if (searchProduct) {
     searchProduct.addEventListener('keyup', e => {
         if (e.key === 'Enter') {
@@ -47,19 +37,15 @@ if (searchProduct) {
         }
     });
 }
-
 if (categoryFilter) {
     categoryFilter.addEventListener('change', applyFilters);
 }
-
 if (stockFilter) {
     stockFilter.addEventListener('change', applyFilters);
 }
-
 if (resetFiltersBtn) {
     resetFiltersBtn.addEventListener('click', resetFilters);
 }
-
 if (selectAllProducts) {
     selectAllProducts.addEventListener('change', handleSelectAll);
 }
@@ -67,58 +53,42 @@ if (selectAllProducts) {
 if (bulkPublish) {
     bulkPublish.addEventListener('click', () => handleBulkAction('published'));
 }
-
 if (bulkDraft) {
     bulkDraft.addEventListener('click', () => handleBulkAction('draft'));
 }
-
 if (bulkDelete) {
     bulkDelete.addEventListener('click', handleBulkDelete);
 }
-
 if (saveProductBtn) {
     saveProductBtn.addEventListener('click', handleAddProduct);
 }
-
 if (updateProductBtn) {
     updateProductBtn.addEventListener('click', handleUpdateProduct);
 }
-
 if (confirmDeleteBtn) {
     confirmDeleteBtn.addEventListener('click', handleDeleteProduct);
 }
 
-// Initialize
 auth.onAuthStateChanged(async user => {
     if (user) {
-        // Check if user is admin
         const isUserAdmin = await isAdmin(user);
         
         if (isUserAdmin) {
-            // Load products
             loadProducts();
-            
-            // Check for product ID in URL
             const urlParams = new URLSearchParams(window.location.search);
             const productId = urlParams.get('id');
             
             if (productId) {
-                // Load product for editing
                 loadProductForEdit(productId);
             }
         }
     }
 });
 
-// Load Products
 async function loadProducts() {
     try {
         showLoading();
-        
-        // Get products from Firestore
         const productsSnapshot = await db.collection('products').get();
-        
-        // Process products
         products = [];
         productsSnapshot.forEach(doc => {
             const product = {
@@ -127,8 +97,6 @@ async function loadProducts() {
             };
             products.push(product);
         });
-        
-        // Apply initial filters
         applyFilters();
         
         hideLoading();
@@ -139,27 +107,20 @@ async function loadProducts() {
     }
 }
 
-// Apply Filters
 function applyFilters() {
-    // Get filter values
     const searchTerm = searchProduct ? searchProduct.value.toLowerCase().trim() : '';
     const category = categoryFilter ? categoryFilter.value : '';
     const stockStatus = stockFilter ? stockFilter.value : '';
     
-    // Filter products
     filteredProducts = products.filter(product => {
-        // Search term filter
+
         if (searchTerm && !product.name.toLowerCase().includes(searchTerm) && 
             !product.description.toLowerCase().includes(searchTerm)) {
             return false;
         }
-        
-        // Category filter
         if (category && product.category !== category) {
             return false;
         }
-        
-        // Stock status filter
         if (stockStatus) {
             if (stockStatus === 'in-stock' && product.stock <= 0) {
                 return false;
@@ -169,35 +130,23 @@ function applyFilters() {
                 return false;
             }
         }
-        
         return true;
     });
-    
-    // Reset pagination
     currentPage = 1;
-    
-    // Reset selected products
     selectedProducts = [];
     if (selectAllProducts) {
         selectAllProducts.checked = false;
     }
-    
-    // Hide bulk actions
     if (bulkActionsContainer) {
         bulkActionsContainer.classList.add('d-none');
     }
-    
-    // Render products
     renderProducts();
     renderPagination();
 }
 
-// Handle Search
 function handleSearch() {
     applyFilters();
 }
-
-// Reset Filters
 function resetFilters() {
     if (searchProduct) searchProduct.value = '';
     if (categoryFilter) categoryFilter.value = '';
@@ -206,19 +155,15 @@ function resetFilters() {
     applyFilters();
 }
 
-// Render Products
 function renderProducts() {
     if (!productsList) return;
-    
-    // Calculate pagination
+
     const startIndex = (currentPage - 1) * productsPerPage;
     const endIndex = startIndex + productsPerPage;
     const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
-    
-    // Clear container
+
     productsList.innerHTML = '';
-    
-    // Check if no products
+
     if (filteredProducts.length === 0) {
         productsList.innerHTML = `
             <tr>
@@ -232,8 +177,6 @@ function renderProducts() {
         
         return;
     }
-    
-    // Render products
     paginatedProducts.forEach(product => {
         const tr = document.createElement('tr');
         
@@ -272,8 +215,7 @@ function renderProducts() {
         
         productsList.appendChild(tr);
     });
-    
-    // Add event listeners
+
     const productCheckboxes = document.querySelectorAll('.product-checkbox');
     const viewButtons = document.querySelectorAll('.action-btn.view');
     const editButtons = document.querySelectorAll('.action-btn.edit');
@@ -310,24 +252,14 @@ function renderProducts() {
     });
 }
 
-// Render Pagination
 function renderPagination() {
     if (!productsPagination) return;
-    
-    // Clear container
     productsPagination.innerHTML = '';
-    
-    // Calculate total pages
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
-    
-    // Check if pagination is needed
+
     if (totalPages <= 1) return;
-    
-    // Create pagination
     const pagination = document.createElement('ul');
     pagination.className = 'pagination';
-    
-    // Previous button
     const prevLi = document.createElement('li');
     prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
     
@@ -348,8 +280,7 @@ function renderPagination() {
     
     prevLi.appendChild(prevLink);
     pagination.appendChild(prevLi);
-    
-    // Page numbers
+
     const maxPages = 5;
     let startPage = Math.max(1, currentPage - Math.floor(maxPages / 2));
     let endPage = Math.min(totalPages, startPage + maxPages - 1);
@@ -377,8 +308,6 @@ function renderPagination() {
         pageLi.appendChild(pageLink);
         pagination.appendChild(pageLi);
     }
-    
-    // Next button
     const nextLi = document.createElement('li');
     nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
     
@@ -399,29 +328,20 @@ function renderPagination() {
     
     nextLi.appendChild(nextLink);
     pagination.appendChild(nextLi);
-    
-    // Append pagination
     productsPagination.appendChild(pagination);
 }
 
-// Handle Product Selection
 function handleProductSelection() {
     const productCheckboxes = document.querySelectorAll('.product-checkbox');
-    
-    // Update selected products
     selectedProducts = [];
     productCheckboxes.forEach(checkbox => {
         if (checkbox.checked) {
             selectedProducts.push(checkbox.value);
         }
     });
-    
-    // Update select all checkbox
     if (selectAllProducts) {
         selectAllProducts.checked = selectedProducts.length > 0 && selectedProducts.length === productCheckboxes.length;
     }
-    
-    // Show/hide bulk actions
     if (bulkActionsContainer) {
         if (selectedProducts.length > 0) {
             bulkActionsContainer.classList.remove('d-none');
@@ -430,28 +350,18 @@ function handleProductSelection() {
         }
     }
 }
-
-// Handle Select All
 function handleSelectAll() {
     const productCheckboxes = document.querySelectorAll('.product-checkbox');
-    
-    // Check/uncheck all checkboxes
     productCheckboxes.forEach(checkbox => {
         checkbox.checked = selectAllProducts.checked;
     });
-    
-    // Update selected products
     handleProductSelection();
 }
-
-// Handle Bulk Action
 async function handleBulkAction(status) {
     if (selectedProducts.length === 0) return;
     
     try {
         showLoading();
-        
-        // Update products in Firestore
         const batch = db.batch();
         
         selectedProducts.forEach(productId => {
@@ -460,16 +370,12 @@ async function handleBulkAction(status) {
         });
         
         await batch.commit();
-        
-        // Update products in memory
         products = products.map(product => {
             if (selectedProducts.includes(product.id)) {
                 return { ...product, status };
             }
             return product;
         });
-        
-        // Apply filters
         applyFilters();
         
         hideLoading();
@@ -480,8 +386,6 @@ async function handleBulkAction(status) {
         showToast('Failed to update products. Please try again.', 'danger');
     }
 }
-
-// Handle Bulk Delete
 async function handleBulkDelete() {
     if (selectedProducts.length === 0) return;
     
@@ -491,8 +395,6 @@ async function handleBulkDelete() {
     
     try {
         showLoading();
-        
-        // Delete products from Firestore
         const batch = db.batch();
         
         selectedProducts.forEach(productId => {
@@ -501,13 +403,8 @@ async function handleBulkDelete() {
         });
         
         await batch.commit();
-        
-        // Remove products from memory
         products = products.filter(product => !selectedProducts.includes(product.id));
-        
-        // Apply filters
         applyFilters();
-        
         hideLoading();
         showToast(`${selectedProducts.length} products deleted successfully.`, 'success');
     } catch (error) {
@@ -516,18 +413,12 @@ async function handleBulkDelete() {
         showToast('Failed to delete products. Please try again.', 'danger');
     }
 }
-
-// View Product
 function viewProduct(productId) {
     const product = products.find(p => p.id === productId);
-    
     if (!product) return;
-    
-    // Open product in new tab
     window.open(`../products.html?product=${productId}`, '_blank');
 }
 
-// Load Product for Edit
 async function loadProductForEdit(productId) {
     if (!editProductForm || !editProductId) return;
     
@@ -547,8 +438,6 @@ async function loadProductForEdit(productId) {
             id: productDoc.id,
             ...productDoc.data()
         };
-        
-        // Set form values
         editProductId.value = product.id;
         document.getElementById('editProductName').value = product.name;
         document.getElementById('editProductCategory').value = product.category;
@@ -570,8 +459,6 @@ async function loadProductForEdit(productId) {
         showToast('Failed to load product. Please try again.', 'danger');
     }
 }
-
-// Handle Add Product
 async function handleAddProduct() {
     if (!addProductForm) return;
     
@@ -583,8 +470,6 @@ async function handleAddProduct() {
     
     try {
         showLoading();
-        
-        // Get form values
         const name = document.getElementById('productName').value;
         const category = document.getElementById('productCategory').value;
         const price = parseFloat(document.getElementById('productPrice').value);
@@ -592,56 +477,27 @@ async function handleAddProduct() {
         const status = document.getElementById('productStatus').value;
         const description = document.getElementById('productDescription').value;
         let imageUrl = document.getElementById('productImage').value;
-        
-        // Upload image if provided
         if (productImageUpload && productImageUpload.files.length > 0) {
             const file = productImageUpload.files[0];
             const storageRef = storage.ref(`products/${Date.now()}_${file.name}`);
-            
-            // Upload file
             const uploadTask = await storageRef.put(file);
-            
-            // Get download URL
             imageUrl = await uploadTask.ref.getDownloadURL();
         }
-        
-        // Add product to Firestore
         const productRef = db.collection('products').doc();
         
         await productRef.set({
-            name,
-            category,
-            price,
-            stock,
-            status,
-            description,
-            imageUrl,
+            name,category,price,stock, status,description,imageUrl,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
-        
-        // Add product to memory
         const newProduct = {
-            id: productRef.id,
-            name,
-            category,
-            price,
-            stock,
-            status,
-            description,
+            id: productRef.id,name,category,price,stock,status,description,
             imageUrl,
             createdAt: new Date()
         };
-        
         products.push(newProduct);
-        
-        // Reset form
         addProductForm.reset();
-        
-        // Close modal
         const modal = bootstrap.Modal.getInstance(document.getElementById('addProductModal'));
         modal.hide();
-        
-        // Apply filters
         applyFilters();
         
         hideLoading();
@@ -653,20 +509,14 @@ async function handleAddProduct() {
     }
 }
 
-// Handle Update Product
 async function handleUpdateProduct() {
     if (!editProductForm || !editProductId) return;
-    
-    // Validate form
     if (!editProductForm.checkValidity()) {
         editProductForm.reportValidity();
         return;
     }
-    
     try {
         showLoading();
-        
-        // Get form values
         const productId = editProductId.value;
         const name = document.getElementById('editProductName').value;
         const category = document.getElementById('editProductCategory').value;
@@ -675,58 +525,29 @@ async function handleUpdateProduct() {
         const status = document.getElementById('editProductStatus').value;
         const description = document.getElementById('editProductDescription').value;
         let imageUrl = document.getElementById('editProductImage').value;
-        
-        // Upload image if provided
+    
         if (editProductImageUpload && editProductImageUpload.files.length > 0) {
             const file = editProductImageUpload.files[0];
             const storageRef = storage.ref(`products/${Date.now()}_${file.name}`);
-            
-            // Upload file
             const uploadTask = await storageRef.put(file);
-            
-            // Get download URL
             imageUrl = await uploadTask.ref.getDownloadURL();
         }
-        
-        // Update product in Firestore
         const productRef = db.collection('products').doc(productId);
-        
-        await productRef.update({
-            name,
-            category,
-            price,
-            stock,
-            status,
-            description,
-            imageUrl,
+        await productRef.update({name,category,price,stock,status,description,imageUrl,
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         });
-        
-        // Update product in memory
         products = products.map(product => {
             if (product.id === productId) {
                 return {
-                    ...product,
-                    name,
-                    category,
-                    price,
-                    stock,
-                    status,
-                    description,
-                    imageUrl,
+                    ...product, name, category, price,stock, status, description,imageUrl,
                     updatedAt: new Date()
                 };
             }
             return product;
         });
-        
-        // Close modal
         const modal = bootstrap.Modal.getInstance(document.getElementById('editProductModal'));
         modal.hide();
-        
-        // Apply filters
         applyFilters();
-        
         hideLoading();
         showToast('Product updated successfully.', 'success');
     } catch (error) {
@@ -736,29 +557,17 @@ async function handleUpdateProduct() {
     }
 }
 
-// Handle Delete Product
 async function handleDeleteProduct() {
     if (!deleteProductId) return;
     
     try {
         showLoading();
-        
-        // Get product ID
         const productId = deleteProductId.value;
-        
-        // Delete product from Firestore
         await db.collection('products').doc(productId).delete();
-        
-        // Remove product from memory
         products = products.filter(product => product.id !== productId);
-        
-        // Close modal
         const modal = bootstrap.Modal.getInstance(document.getElementById('deleteProductModal'));
         modal.hide();
-        
-        // Apply filters
         applyFilters();
-        
         hideLoading();
         showToast('Product deleted successfully.', 'success');
     } catch (error) {
@@ -767,8 +576,6 @@ async function handleDeleteProduct() {
         showToast('Failed to delete product. Please try again.', 'danger');
     }
 }
-
-// Get Stock Badge Class
 function getStockBadgeClass(stock) {
     if (stock <= 0) {
         return 'bg-danger';
