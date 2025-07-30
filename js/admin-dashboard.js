@@ -1,4 +1,3 @@
-// DOM Elements
 const totalProductsElement = document.getElementById('totalProducts');
 const totalOrdersElement = document.getElementById('totalOrders');
 const totalUsersElement = document.getElementById('totalUsers');
@@ -7,12 +6,9 @@ const recentOrdersList = document.getElementById('recentOrdersList');
 const lowStockList = document.getElementById('lowStockList');
 auth.onAuthStateChanged(async user => {
     if (user) {
-       
-        const isUserAdmin = await isAdmin(user);
-        
-        if (isUserAdmin) {
-          
-            loadDashboardStats();
+       const isUserAdmin = await isAdmin(user);
+         if (isUserAdmin) {
+          loadDashboardStats();
             loadRecentOrders();
             loadLowStockProducts();
         }
@@ -20,22 +16,17 @@ auth.onAuthStateChanged(async user => {
 });
 async function loadDashboardStats() {
     try {
-  
-        const productsSnapshot = await db.collection('products').get();
+       const productsSnapshot = await db.collection('products').get();
         const totalProducts = productsSnapshot.size;
-        
         if (totalProductsElement) {
             totalProductsElement.textContent = totalProducts;
         }
-        
         const ordersSnapshot = await db.collection('orders').get();
         const totalOrders = ordersSnapshot.size;
         
         if (totalOrdersElement) {
             totalOrdersElement.textContent = totalOrders;
         }
-        
-     
         const usersSnapshot = await db.collection('users').get();
         const totalUsers = usersSnapshot.size;
         
@@ -49,7 +40,6 @@ async function loadDashboardStats() {
             const order = doc.data();
             totalRevenue += order.total || 0;
         });
-        
         if (totalRevenueElement) {
             totalRevenueElement.textContent = formatCurrency(totalRevenue);
         }
@@ -58,23 +48,18 @@ async function loadDashboardStats() {
         showToast('Failed to load dashboard statistics.', 'danger');
     }
 }
-
 async function loadRecentOrders() {
     if (!recentOrdersList) return;
-    
     try {
         const ordersSnapshot = await db.collection('orders')
             .orderBy('createdAt', 'desc')
             .limit(5)
             .get();
-        
         recentOrdersList.innerHTML = '';
-        
         if (ordersSnapshot.empty) {
             recentOrdersList.innerHTML = '<tr><td colspan="6" class="text-center">No orders found.</td></tr>';
             return;
         }
-       
         ordersSnapshot.forEach(doc => {
             const order = doc.data();
             const orderId = doc.id;
@@ -102,27 +87,21 @@ async function loadRecentOrders() {
         recentOrdersList.innerHTML = '<tr><td colspan="6" class="text-center text-danger">Error loading orders.</td></tr>';
     }
 }
-
-
 async function loadLowStockProducts() {
     if (!lowStockList) return;
     
     try {
- 
-        const productsSnapshot = await db.collection('products')
+    const productsSnapshot = await db.collection('products')
             .where('stock', '<', 10)
             .orderBy('stock', 'asc')
             .limit(5)
             .get();
-        
-
         lowStockList.innerHTML = '';
         
         if (productsSnapshot.empty) {
             lowStockList.innerHTML = '<tr><td colspan="6" class="text-center">No low stock products found.</td></tr>';
             return;
         }
-        
         productsSnapshot.forEach(doc => {
             const product = doc.data();
             const productId = doc.id;
