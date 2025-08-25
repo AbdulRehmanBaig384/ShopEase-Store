@@ -1,4 +1,4 @@
-<img width="1864" height="880" alt="Screenshot 2025-08-26 010111" src="https://github.com/user-attachments/assets/3d67c4b4-c7b5-4ab3-800f-918ecd6d6a7e" />
+<img width="100%" height="100%" alt="Screenshot 2025-08-26 010111" src="https://github.com/user-attachments/assets/3d67c4b4-c7b5-4ab3-800f-918ecd6d6a7e" />
 
 🛍 ShopEase - Your Ultimate Online Shopping Experience
 
