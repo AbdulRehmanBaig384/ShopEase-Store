@@ -45,6 +45,8 @@ JavaScript – Adds interactivity and functionality..<br>
 
 Firebase Authentication – Handles secure user authentication..<br>
 
+<img width="1892" height="945" alt="Screenshot 2025-08-26 010149" src="https://github.com/user-attachments/assets/4f9685d5-2d8e-4e83-bd8e-074a24aceb17" />
+
 
 ---
 
