@@ -1,6 +1,6 @@
 <img width="100%" height="100%" alt="Screenshot 2025-08-26 010111" src="https://github.com/user-attachments/assets/3d67c4b4-c7b5-4ab3-800f-918ecd6d6a7e" />
 
-🛍 ShopEase - Your Ultimate Online Shopping Experience
+<h2>🛍 ShopEase - Your Ultimate Online Shopping Experience</h2>
 
 Welcome to ShopEase, a powerful and user-friendly e-commerce platform designed for seamless shopping. Built using HTML, CSS, Bootstrap, JavaScript, and Firebase, ShopEase provides a smooth, responsive, and secure experience for users.
 
