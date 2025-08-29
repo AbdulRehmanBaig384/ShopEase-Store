@@ -139,7 +139,6 @@ Want to improve ShopEase? Follow these steps:
 
 1. Fork this repository.
 
-
 2. Create a new branch (feature-branch).
 
 
