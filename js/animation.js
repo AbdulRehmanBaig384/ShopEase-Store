@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initMouseEffects();
     addButtonShine();
 });
+
 function initParticles() {
     const particlesContainer = document.createElement('div');
     particlesContainer.className = 'particles-background';
@@ -24,6 +25,7 @@ function initParticles() {
         particlesContainer.appendChild(particle);
     }
 }
+
 function initWaves() {
     const waveContainer = document.createElement('div');
     waveContainer.className = 'wave-background';
