@@ -76,7 +76,9 @@ function addButtonShine() {
     });
 }
 function addHeroGlow() {
+    
     const heroSection = document.querySelector('.hero-section');
+    
     if (heroSection) {
         const glow = document.createElement('div');
         glow.className = 'hero-glow';
