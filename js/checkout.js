@@ -1,4 +1,3 @@
-// DOM Elements
 const shippingForm = document.getElementById('shippingForm');
 const paymentForm = document.getElementById('paymentForm');
 const paymentCard = document.getElementById('paymentCard');
