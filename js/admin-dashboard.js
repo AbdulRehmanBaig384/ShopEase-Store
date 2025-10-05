@@ -3,7 +3,9 @@ const totalProductsElement = document.getElementById('totalProducts');
 const totalOrdersElement = document.getElementById('totalOrders');
 
 const totalUsersElement = document.getElementById('totalUsers');
+
 const totalRevenueElement = document.getElementById('totalRevenue');
+
 const recentOrdersList = document.getElementById('recentOrdersList');
 const lowStockList = document.getElementById('lowStockList');
 auth.onAuthStateChanged(async user => {
