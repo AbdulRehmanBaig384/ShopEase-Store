@@ -154,11 +154,15 @@ function getStatusBadgeClass(status) {
 function getStockBadgeClass(stock) {
     if (stock <= 0) {
         return 'bg-danger';
-    } else if (stock < 5) {
+    }
+    else 
+        if (stock < 5) {
         return 'bg-warning';
-    } else if (stock < 10) {
+    }
+    else if (stock < 10) {
         return 'bg-info';
-    } else {
+    } 
+    else {
         return 'bg-success';
     }
 } 
