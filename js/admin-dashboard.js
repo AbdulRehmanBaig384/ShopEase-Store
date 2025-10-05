@@ -70,8 +70,7 @@ async function loadRecentOrders() {
             const orderId = doc.id;
             
             const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${orderId.substring(0, 8)}...</td>
+            tr.innerHTML = ` <td>${orderId.substring(0, 8)}...</td>
                 <td>${order.shippingInfo ? `${order.shippingInfo.firstName} ${order.shippingInfo.lastName}` : 'N/A'}</td>
                 <td>${formatDate(order.createdAt)}</td>
                 <td>
