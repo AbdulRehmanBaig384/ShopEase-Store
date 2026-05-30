@@ -10,15 +10,20 @@
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/animation.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <meta name="description" content="ShopEase - Your one-stop shopping destination for amazing products at unbeatable prices.">
 </head>
 <body>
  
+    <!-- Mobile backdrop overlay -->
+    <div class="navbar-backdrop" id="navbarBackdrop"></div>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
                 <i class="fas fa-shopping-bag me-2"></i>ShopEase
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -37,8 +42,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="register.html">Register</a>
                     </li>
-                    
-                    <li class="nav-item admin-link">
+                    <li class="nav-item admin-link d-none">
                         <a class="nav-link" href="admin-products.html">
                             <i class="fas fa-user-shield me-1"></i>Admin
                         </a>
@@ -88,22 +92,22 @@
 
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="https://img.lazcdn.com/us/domino/a20dfa8d-1a60-4132-9aa4-cf70d7f5d75c_PK-1976-688.jpg_2200x2200q80.jpg" style="height: 500px;" class="d-block w-100 h-40" alt="Product 1">
+                    <img src="https://img.lazcdn.com/us/domino/a20dfa8d-1a60-4132-9aa4-cf70d7f5d75c_PK-1976-688.jpg_2200x2200q80.jpg" class="d-block w-100" alt="Featured Product - Tracksuit" loading="eager">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://img.lazcdn.com/us/domino/d6f111fa-784c-4523-8489-fabed2a781b0_PK-1976-688.jpg_2200x2200q80.jpg" style="height: 500px;" class="d-block w-100" alt="Product 2">
+                    <img src="https://img.lazcdn.com/us/domino/d6f111fa-784c-4523-8489-fabed2a781b0_PK-1976-688.jpg_2200x2200q80.jpg" class="d-block w-100" alt="Featured Product - Clothing" loading="lazy">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://img.lazcdn.com/us/lazada_mars_image/9f4d95957dd12adcc5bfb341190922af.jpg_2200x2200q80.jpg" style="height: 500px; background-size: cover; " class="d-block w-100" alt="Product 3">
+                    <img src="https://img.lazcdn.com/us/lazada_mars_image/9f4d95957dd12adcc5bfb341190922af.jpg_2200x2200q80.jpg" class="d-block w-100" alt="Featured Product - Electronics" loading="lazy">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://img.lazcdn.com/us/lazada_mars_image/c72940960af0bf203bb26a7813d669e1.jpg_2200x2200q80.jpg" style="height: 500px; background-size: cover; " class="d-block w-100" alt="Product 3">
+                    <img src="https://img.lazcdn.com/us/lazada_mars_image/c72940960af0bf203bb26a7813d669e1.jpg_2200x2200q80.jpg" class="d-block w-100" alt="Featured Product - Gadgets" loading="lazy">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://img.lazcdn.com/us/lazada_mars_image/c72940960af0bf203bb26a7813d669e1.jpg_2200x2200q80.jpg" style="height: 500px; background-size: cover; " class="d-block w-100" alt="Product 3">
+                    <img src="https://img.lazcdn.com/us/lazada_mars_image/c72940960af0bf203bb26a7813d669e1.jpg_2200x2200q80.jpg" class="d-block w-100" alt="Featured Product" loading="lazy">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://img.lazcdn.com/us/domino/a20dfa8d-1a60-4132-9aa4-cf70d7f5d75c_PK-1976-688.jpg_2200x2200q80.jpg" style="height: 500px; background-size: cover; " class="d-block w-100" alt="Product 3">
+                    <img src="https://img.lazcdn.com/us/domino/a20dfa8d-1a60-4132-9aa4-cf70d7f5d75c_PK-1976-688.jpg_2200x2200q80.jpg" class="d-block w-100" alt="Featured Product" loading="lazy">
                 </div>
             </div>
         </div>
@@ -119,46 +123,43 @@
             <div class="row g-4">
                     <div class="col-md-4">
                         <div class="card product-card">
-                            <img src="images/tshirt1.avif" class="card-img-top" alt="Product 7">
+                            <img src="images/tshirt1.avif" class="card-img-top" alt="Black Tracksuit" loading="lazy">
                             <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
                                 <i class="far fa-heart"></i>
                             </button>
                             <div class="card-body">
-                                <h5 class="card-title"><b>Black Tracksuit side lion face </b></h5>
-                                <p class="card-text">Black Tracksuit side lion face printed summer track Men's Clothing Summer Breathable T-Shirt and Black Shorts Gym wear and comfortable <br><br><span style="font-size: 20px;"><b>USD:$300.0</b></span></p>
-                                <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
-                                <a href="login.html" class="btn btn-primary" style="width: 320px;margin-top: 10px;"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
-                               
+                                <h5 class="card-title"><b>Black Tracksuit side lion face</b></h5>
+                                <p class="card-text">Black Tracksuit side lion face printed summer track Men's Clothing Summer Breathable T-Shirt and Black Shorts Gym wear and comfortable <br><br><b>USD: $300.0</b></p>
+                                <a href="login.html" class="btn btn-primary w-100">View Details</a>
+                                <a href="login.html" class="btn btn-primary w-100 mt-2"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card product-card">
-                            <img src="images/tshirt2.avif" class="card-img-top" style="height: 355px;" alt="Product 8">
+                            <img src="images/tshirt2.avif" class="card-img-top" alt="Plain White T-Shirt" loading="lazy">
                             <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
                                 <i class="far fa-heart"></i>
                             </button>
                             <div class="card-body">
                                 <h5 class="card-title"><b>Plain White T-Shirt For Men</b></h5>
-                                <p class="card-text">Plain White T-Shirt for men- Half Sleeve/Round Neck With Premium Excellent Quality Plan Basic T-Shirts For Boy's & Men's.Its a awesome Product <br><br><span style="font-size: 20px;"><b>USD:$125.0</b></span></p>
-                                <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
-                                <a href="login.html" class="btn btn-primary" style="width: 320px;margin-top: 10px "><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
-                               
+                                <p class="card-text">Plain White T-Shirt for men- Half Sleeve/Round Neck With Premium Excellent Quality Plan Basic T-Shirts For Boy's & Men's. <br><br><b>USD: $125.0</b></p>
+                                <a href="login.html" class="btn btn-primary w-100">View Details</a>
+                                <a href="login.html" class="btn btn-primary w-100 mt-2"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card product-card">
-                            <img src="images/tshirt3.avif" class="card-img-top" alt="Product 9">
+                            <img src="images/tshirt3.avif" class="card-img-top" alt="Party Track suits" loading="lazy">
                             <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
                                 <i class="far fa-heart"></i>
                             </button>
                             <div class="card-body">
-                                <h5 class="card-title"> <b> Party Track suits T-shirt & Trouser </b></h5>
-                                <p class="card-text">This Party Track suits T-shirt & Trouser For Men is a perfect blend of sport and street style. The stripe pattern adds a touch of uniqueness to the outfit. <br><br><span style="font-size: 20px;"><b>USD:$220.0</b></span></p>
-                                <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
-                                <a href="login.html" class="btn btn-primary" style="width: 320px;margin-top: 10px"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
-
+                                <h5 class="card-title"><b>Party Track suits T-shirt & Trouser</b></h5>
+                                <p class="card-text">This Party Track suits T-shirt & Trouser For Men is a perfect blend of sport and street style. The stripe pattern adds a touch of uniqueness. <br><br><b>USD: $220.0</b></p>
+                                <a href="login.html" class="btn btn-primary w-100">View Details</a>
+                                <a href="login.html" class="btn btn-primary w-100 mt-2"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
                             </div>
                         </div>
                     </div>
@@ -167,93 +168,86 @@
                     
                 <div class="col-md-4">
                     <div class="card product-card">
-                        <img src="images/sumsung.avif" class="card-img-top" alt="Product 4" style="height: 355px;">
+                        <img src="images/sumsung.avif" class="card-img-top" alt="Samsung Galaxy S25 Ultra" loading="lazy">
                         <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
                             <i class="far fa-heart"></i>
                         </button>
                         <div class="card-body">
                             <h5 class="card-title"><b>Samsung Galaxy S25 Ultra</b></h5>
-                            <p class="card-text">Samsung Galaxy S25 Ultra 12 GB RAM + 512 GB ROM.Display 6.9" Dynamic AMOLED 2x QHD+,Performance 7 Years OS & Security upgrade <br><br><span style="font-size: 20px;"><b>USD:$6000.0</b></span></p>
-                            <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
-                            <a href="login.html" class="btn btn-primary" style="width: 320px;margin-top: 10px"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
-                         
+                            <p class="card-text">Samsung Galaxy S25 Ultra 12 GB RAM + 512 GB ROM. 6.9" Dynamic AMOLED 2x QHD+. 7 Years OS & Security upgrade. <br><br><b>USD: $6000.0</b></p>
+                            <a href="login.html" class="btn btn-primary w-100">View Details</a>
+                            <a href="login.html" class="btn btn-primary w-100 mt-2"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card product-card">
-                        <img src="images/iphone1.avif" class="card-img-top" alt="Product 5">
+                        <img src="images/iphone1.avif" class="card-img-top" alt="Apple iPhone 16 Pro Max" loading="lazy">
                         <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
                             <i class="far fa-heart"></i>
                         </button>
                         <div class="card-body">
-                            <h5 class="card-title"><b>Apple Iphone 16 Pro Max</b></h5>
-                            <p class="card-text">Apple Iphone 16 Pro Max - 6.9" Inch Display - Factory locked - 1 Year Official Warranty.High Contrast Ratio: 2,000,000:1 for deep blacks and bright whites.<br><br><span style="font-size: 20px;"><b>USD:$6500.0</b></span></p>
-                            <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
-                            <a href="login.html" class="btn btn-primary" style="width: 320px;margin-top: 10px"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
-                          
+                            <h5 class="card-title"><b>Apple iPhone 16 Pro Max</b></h5>
+                            <p class="card-text">Apple iPhone 16 Pro Max - 6.9" Display - Factory Locked - 1 Year Official Warranty. 2,000,000:1 Contrast Ratio.<br><br><b>USD: $6500.0</b></p>
+                            <a href="login.html" class="btn btn-primary w-100">View Details</a>
+                            <a href="login.html" class="btn btn-primary w-100 mt-2"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card product-card">
-                        <img src="images/iphone2.avif" class="card-img-top" style="height:350px;" alt="Product 6">
+                        <img src="images/iphone2.avif" class="card-img-top" alt="Apple iPhone 12 Pro Max" loading="lazy">
                         <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
                             <i class="far fa-heart"></i>
                         </button>
                         <div class="card-body">
-                            
-                            <h5 class="card-title"><b>Apple IPhone 12 Pro Max</b></h5>
-                            <p class="card-text">Apple IPhone 12 Pro Max - 256GB - PTA APPROVED - Brand New Condition - 85+ Battery Health - (WITH FREE CHARGER & COVER) - like new phones <br><br><span style="font-size: 20px;"><b>USD:$3500.0</b></span></p>
-                            <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
-                            <a href="login.html" class="btn btn-primary" style="width: 320px;margin-top: 10px"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
+                            <h5 class="card-title"><b>Apple iPhone 12 Pro Max</b></h5>
+                            <p class="card-text">Apple iPhone 12 Pro Max - 256GB - PTA APPROVED - Brand New - 85+ Battery Health - Free Charger & Cover included.<br><br><b>USD: $3500.0</b></p>
+                            <a href="login.html" class="btn btn-primary w-100">View Details</a>
+                            <a href="login.html" class="btn btn-primary w-100 mt-2"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
                         </div>
                     </div>
                 </div>
                    
-                 <div class="col-md-4">
+                <div class="col-md-4">
                     <div class="card product-card">
-                        <img src="images/airpods1.avif" class="card-img-top" alt="Product 1">
+                        <img src="images/airpods1.avif" class="card-img-top" alt="Airpods Air Pro" loading="lazy">
                         <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
                             <i class="far fa-heart"></i>
                         </button>
                         <div class="card-body">
-                            <h5 class="card-title"><b>Airpods Air Pro </b></h5>
-                            <p class="card-text">Airpods Air Pro 3rd Gen TWS (True Wireless Stereo) Bluetooth Earbuds Dual Earphones Headset (Connect With All Bluetooth Devices).BLUETOOTH handfree <br><br><span style="font-size: 20px;"><b>USD:$200.0</b></span></p>
-                            <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
-                            <a href="login.html" class="btn btn-primary" style="width: 320px;margin-top: 10px"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
-                          
+                            <h5 class="card-title"><b>Airpods Air Pro</b></h5>
+                            <p class="card-text">Airpods Air Pro 3rd Gen TWS Bluetooth Earbuds — connects with all Bluetooth devices. <br><br><b>USD: $200.0</b></p>
+                            <a href="login.html" class="btn btn-primary w-100">View Details</a>
+                            <a href="login.html" class="btn btn-primary w-100 mt-2"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card product-card">
-                        <img src="images/airpods2.jpg" class="card-img-top" alt="Product 2">
+                        <img src="images/airpods2.jpg" class="card-img-top" alt="Airpods Pro Wireless" loading="lazy">
                         <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
                             <i class="far fa-heart"></i>
                         </button>
                         <div class="card-body">
-                            <h5 class="card-title"><b>Airpods_Pro Wireless </b></h5>
-                            <p class="card-text">
-                                Airpods_Pro Wireless Earbuds Bluetooth 5.0 Compatible with IOS and Android.Battery capacity of the storage box: 2000MAH 8.Transmission distance :> 10M.<br><br><span style="font-size: 20px;"><b>USD:$270.0</b></span></p>
-                                <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
-                                <a href="login.html" class="btn btn-primary" style="width: 320px; margin-top: 10px"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
-             
+                            <h5 class="card-title"><b>Airpods Pro Wireless</b></h5>
+                            <p class="card-text">Airpods Pro Wireless Earbuds Bluetooth 5.0 — iOS & Android. 2000mAh storage box. Range: 10M+.<br><br><b>USD: $270.0</b></p>
+                            <a href="login.html" class="btn btn-primary w-100">View Details</a>
+                            <a href="login.html" class="btn btn-primary w-100 mt-2"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card product-card">
-                        <img src="images/airpods3.jpg" class="card-img-top" alt="Product 3">
+                        <img src="images/airpods3.jpg" class="card-img-top" alt="Original AirPod Pro 2nd Gen" loading="lazy">
                         <button class="favorite-btn" title="Add to favorites" onclick="window.location.href='login.html'">
                             <i class="far fa-heart"></i>
                         </button>
                         <div class="card-body">
-                            <h5 class="card-title"><b>Original AirPod Pro </b></h5>
-                            <p class="card-text">Original AirPod Pro (2nd Generation) Headset Wireless Bluetooth Connection-Durable Top Quality ANC Active Noise Cancellation Airbuds.<br><br><span style="font-size: 20px;"><b>USD:$250.0</b></span></p>
-                            <a href="login.html" class="btn btn-primary" style="width: 320px;">View Details</a>
-                            <a href="login.html" class="btn btn-primary" style="width: 320px; margin-top: 10px"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
-                            
+                            <h5 class="card-title"><b>Original AirPod Pro</b></h5>
+                            <p class="card-text">Original AirPod Pro (2nd Generation) — Wireless Bluetooth, ANC Active Noise Cancellation. Top Quality.<br><br><b>USD: $250.0</b></p>
+                            <a href="login.html" class="btn btn-primary w-100">View Details</a>
+                            <a href="login.html" class="btn btn-primary w-100 mt-2"><i class="fas fa-cart-plus me-2"></i>Add to Cart</a>
                         </div>
                     </div>
                 </div>
@@ -261,7 +255,7 @@
             </div>
         </div>
        
-        <a href="login.html " class="btn"  style="background: linear-gradient(to right, black, gray); color: white; width: 320px; margin: 20px 480px; border: none; font-weight: bold; padding: 10px 20px; text-align: center; display: inline-block; text-decoration: none; border-radius: 5px;">Explore More Products</a>
+        <a href="login.html" class="btn btn-primary explore-more-btn">Explore More Products</a>
 
 
 
@@ -394,8 +388,37 @@
 
     <script src="js/firebase-config.js"></script>
     <script src="js/main.js"></script>
-
     <script src="js/animation.js"></script>
+
+    <!-- Mobile navbar drawer & scroll behaviour -->
+    <script>
+        (function() {
+            var navEl   = document.getElementById('navbarNav');
+            var backdrop = document.getElementById('navbarBackdrop');
+            var navbar  = document.querySelector('.navbar');
+
+            // Backdrop closes drawer
+            backdrop.addEventListener('click', function() {
+                var bsCollapse = bootstrap.Collapse.getInstance(navEl);
+                if (bsCollapse) bsCollapse.hide();
+            });
+
+            // Show/hide backdrop with drawer
+            navEl.addEventListener('show.bs.collapse', function() {
+                backdrop.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            navEl.addEventListener('hide.bs.collapse', function() {
+                backdrop.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            // Sticky shadow on scroll
+            window.addEventListener('scroll', function() {
+                navbar.classList.toggle('navbar-scrolled', window.scrollY > 10);
+            }, { passive: true });
+        })();
+    </script>
     
     <script>
        

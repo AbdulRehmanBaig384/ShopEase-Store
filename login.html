@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="css/theme.css">
 </head>
 <body>
+    <!-- Mobile backdrop overlay -->
+    <div class="navbar-backdrop" id="navbarBackdrop"></div>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
@@ -115,6 +118,30 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     <script src="js/firebase-config.js"></script>
     <script src="js/auth.js"></script>
+    <script>
+        (function() {
+            var navEl = document.getElementById('navbarNav');
+            var backdrop = document.getElementById('navbarBackdrop');
+            var navbar = document.querySelector('.navbar');
+            if (backdrop && navEl) {
+                backdrop.addEventListener('click', function() {
+                    var c = bootstrap.Collapse.getInstance(navEl);
+                    if (c) c.hide();
+                });
+                navEl.addEventListener('show.bs.collapse', function() {
+                    backdrop.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+                navEl.addEventListener('hide.bs.collapse', function() {
+                    backdrop.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+            window.addEventListener('scroll', function() {
+                if (navbar) navbar.classList.toggle('navbar-scrolled', window.scrollY > 10);
+            }, { passive: true });
+        })();
+    </script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
