@@ -1,7 +1,7 @@
-const adminLogoutBtn = document.getElementById('adminLogoutBtn');
-const adminNameElement = document.getElementById('adminName');
+const adminLogoutBtn =document.getElementById('adminLogoutBtn');
+const adminNameElement=document.getElementById('adminName');
 if (adminLogoutBtn){
-    adminLogoutBtn.addEventListener('click', handleAdminLogout);
+    adminLogoutBtn.addEventListener('click',handleAdminLogout);
 }
 async function handleAdminLogout(e){
     e.preventDefault();   
