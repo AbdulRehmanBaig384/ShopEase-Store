@@ -1,11 +1,11 @@
 const adminLogoutBtn = document.getElementById('adminLogoutBtn');
 const adminNameElement = document.getElementById('adminName');
-if (adminLogoutBtn) {
+if (adminLogoutBtn){
     adminLogoutBtn.addEventListener('click', handleAdminLogout);
 }
 async function handleAdminLogout(e) {
     e.preventDefault();   
-    try {
+    try{
         showLoading();
         await auth.signOut();
         window.location.href = 'login.html';
