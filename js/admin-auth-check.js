@@ -16,7 +16,7 @@ async function handleAdminLogout(e){
     }
 }
 auth.onAuthStateChanged(async user => {
-    if (user) {
+    if (user){
         const isUserAdmin = await isAdmin(user);
         
         if (isUserAdmin) {
@@ -27,8 +27,7 @@ auth.onAuthStateChanged(async user => {
         } else {
             await auth.signOut();
             window.location.href = 'login.html';
-        }
-    } else {
-        window.location.href = 'login.html';
+        }}else{
+        window.location.href='login.html';
     }
 }); 
